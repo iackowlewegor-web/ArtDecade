@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Егор Яковлев — графический дизайнер</title>
+<meta name="description" content="Портфолио графического дизайнера Егора Яковлева: логотипы, айдентика, SMM и нейрогенерации.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Climate+Crisis:YEAR@1979..2050&family=Unbounded:wght@300;500;700;900&family=Neucha&family=Onest:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0A0A0B; --ink:#EDEAE3; --muted:rgba(237,234,227,.56); --line:rgba(237,234,227,.14);
+  --red:#FF3B2F; --blue:#5B8CFF; --yellow:#FFE45C; --orange:#FF8A2A; --ice:#A9D1FF;
+  --f-melt:"Climate Crisis","Unbounded","Arial Black",sans-serif;
+  --f-wide:"Unbounded","Arial Black",sans-serif;
+  --f-hand:"Neucha","Comic Sans MS",cursive;
+  --f-body:"Onest",system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+  --pad:clamp(20px,4.2vw,64px);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font:16px/1.55 var(--f-body);-webkit-font-smoothing:antialiased;overflow-x:clip}
+html{overflow-x:clip}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+img{display:block;max-width:100%}
+img{-webkit-user-drag:none;user-select:none}
+:focus-visible{outline:2px dashed var(--yellow);outline-offset:4px}
+.wrap{padding-inline:var(--pad);max-width:1680px;margin-inline:auto;position:relative}
+.hand{font-family:var(--f-hand);color:var(--yellow);font-size:clamp(18px,1.5vw,24px);line-height:1.15}
+
+/* grain */
+body::after{content:"";position:fixed;inset:-50%;z-index:90;pointer-events:none;opacity:.13;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 1 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  animation:grain 1s steps(6) infinite}
+@keyframes grain{0%{transform:translate(0,0)}20%{transform:translate(-3%,2%)}40%{transform:translate(2%,-3%)}60%{transform:translate(-2%,-1%)}80%{transform:translate(3%,3%)}}
+
+/* stars */
+.sky{position:absolute;inset:0;pointer-events:none;overflow:hidden;z-index:0}
+.star{position:absolute;width:var(--s);height:var(--s);color:var(--c);will-change:transform;animation:float var(--d) ease-in-out infinite alternate}
+.star svg{width:100%;height:100%;overflow:visible}
+.star.glow svg{filter:blur(calc(var(--s) * .06)) drop-shadow(0 0 calc(var(--s)*.25) currentColor)}
+.star.line svg path{fill:none;stroke:currentColor;stroke-width:5}
+@keyframes float{from{transform:translateY(-8px) rotate(-8deg)}to{transform:translateY(10px) rotate(10deg)}}
+
+/* cursor */
+.cursor{position:fixed;left:0;top:0;z-index:95;pointer-events:none;width:14px;height:14px;margin:-7px 0 0 -7px;color:var(--yellow);transition:width .3s,height .3s,margin .3s;display:none}
+.cursor svg{width:100%;height:100%;filter:drop-shadow(0 0 6px currentColor)}
+.cursor span{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);font:500 12px var(--f-body);color:#000;opacity:0;white-space:nowrap;letter-spacing:.06em;text-transform:uppercase}
+.cursor::before{content:"";position:absolute;inset:0;border-radius:50%;background:var(--yellow);transform:scale(0);transition:transform .3s}
+.cursor.big{width:110px;height:110px;margin:-55px 0 0 -55px}
+.cursor.big::before{transform:scale(1)}
+.cursor.big svg{opacity:0}
+.cursor.big span{opacity:1}
+@media (hover:hover) and (pointer:fine){.cursor{display:block}}
+
+/* nav */
+.nav{position:fixed;top:0;left:0;right:0;z-index:60;display:flex;align-items:center;justify-content:space-between;gap:24px;padding:18px var(--pad);transition:background .3s,backdrop-filter .3s}
+.nav.solid{background:rgba(10,10,11,.6);backdrop-filter:blur(14px)}
+.brand{font:900 17px var(--f-wide);letter-spacing:-.02em;display:flex;align-items:center;gap:8px}
+.brand svg{width:18px;height:18px;color:var(--red);filter:drop-shadow(0 0 6px var(--red))}
+.links{display:flex;gap:clamp(14px,2vw,32px);list-style:none;font-size:14px}
+.links a{display:inline-flex;gap:6px;align-items:baseline;min-height:44px;align-items:center;opacity:.75;transition:opacity .2s}
+.links a:hover{opacity:1}
+.links a i{font:normal 13px var(--f-hand);color:var(--yellow)}
+.talk{font:500 14px var(--f-body);display:inline-flex;gap:8px;align-items:center;border:1px solid var(--line);border-radius:999px;padding:0 18px;min-height:44px;transition:.25s}
+.talk:hover{background:var(--yellow);color:#000;border-color:var(--yellow)}
+.burger{display:none;font:500 14px var(--f-body);min-height:44px;min-width:44px;border:1px solid var(--line);border-radius:999px;padding:0 18px}
+.mmenu{position:fixed;inset:0;z-index:70;background:var(--bg);display:none;flex-direction:column;justify-content:center;padding:var(--pad);gap:8px}
+.mmenu.open{display:flex}
+.mmenu a{font:700 clamp(34px,10vw,56px)/1.1 var(--f-wide);text-transform:lowercase;letter-spacing:-.04em;display:flex;gap:12px;align-items:baseline}
+.mmenu a i{font:normal 20px var(--f-hand);color:var(--yellow)}
+.mmenu .x{position:absolute;top:18px;right:var(--pad)}
+
+/* hero */
+.hero{min-height:100svh;position:relative;display:flex;flex-direction:column;justify-content:center;padding-top:110px;padding-bottom:36px;overflow:hidden}
+.hero .wrap{z-index:2;width:100%}
+.hero-kicker{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;margin-bottom:clamp(16px,2vw,28px)}
+
+.meta-sm{color:var(--muted);font-size:13px;letter-spacing:.12em;text-transform:uppercase}
+.name{font-family:var(--f-melt);font-size:clamp(34px,11.8vw,205px);line-height:.92;letter-spacing:.05em;text-transform:uppercase;user-select:none}
+.name .ch:last-child{margin-right:-.05em}
+.name .row{display:flex;white-space:nowrap}
+.name .row:last-child{justify-content:flex-end}
+.name .ch{display:inline-block;font-variation-settings:"YEAR" var(--y,2005);transition:font-variation-settings .5s cubic-bezier(.2,.7,.2,1),color .5s}
+.name .ch.hot{color:var(--yellow)}
+.hero-mid{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:24px;margin:clamp(10px,1.4vw,22px) 0}
+.hero-mid p{font-size:clamp(16px,1.35vw,20px);max-width:420px;color:var(--ink)}
+.hero-mid p b{font-weight:500;color:var(--yellow)}
+.badge{width:clamp(110px,10vw,150px);aspect-ratio:1;position:relative;justify-self:center}
+.badge svg.ring{width:100%;height:100%;animation:spin 18s linear infinite}
+.badge svg.ring text{font:500 10.5px var(--f-body);letter-spacing:.24em;text-transform:uppercase;fill:var(--ink)}
+.badge .core{position:absolute;inset:32%;color:var(--red);filter:drop-shadow(0 0 14px var(--red))}
+@keyframes spin{to{transform:rotate(1turn)}}
+.hero-mid .hand{justify-self:end;text-align:right;transform:rotate(2deg)}
+.hero-foot{display:flex;justify-content:space-between;align-items:center;gap:24px;margin-top:clamp(24px,3vw,44px);border-top:1px solid var(--line);padding-top:18px}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{background:var(--bg);border:1px solid var(--line);border-radius:999px;padding:8px 16px;font-size:14px;min-height:40px;display:inline-flex;align-items:center;transition:.25s}
+.chip:hover{border-color:var(--yellow);color:var(--yellow)}
+.down{display:flex;align-items:center;gap:10px;font-family:var(--f-hand);font-size:20px;color:var(--muted)}
+.down svg{width:20px;height:40px;animation:bob 1.6s ease-in-out infinite}
+@keyframes bob{50%{transform:translateY(6px)}}
+
+/* manifesto */
+.manifesto{padding-block:clamp(100px,13vw,200px) clamp(60px,8vw,120px);position:relative}
+.manifesto h2{font:300 clamp(30px,4.8vw,84px)/1.12 var(--f-wide);letter-spacing:-.045em;max-width:1400px}
+.manifesto h2 b{font-weight:700}
+.pill{display:inline-block;vertical-align:middle;width:1.9em;height:.92em;border-radius:999px;overflow:hidden;margin:0 .08em;transform:translateY(-.06em) rotate(var(--r,0deg));border:2px solid var(--ink)}
+.pill img{width:100%;height:100%;object-fit:cover}
+.inl-star{display:inline-block;width:.7em;height:.7em;vertical-align:middle;color:var(--c);filter:drop-shadow(0 0 10px currentColor);transform:translateY(-.08em)}
+.manifesto .note{position:absolute;right:var(--pad);bottom:clamp(20px,4vw,60px);transform:rotate(-4deg);display:flex;gap:8px;align-items:center}
+.manifesto .note svg{width:60px;height:40px}
+
+/* section heads */
+.work{position:relative;padding-top:clamp(90px,11vw,170px)}
+.head{display:flex;align-items:flex-end;justify-content:space-between;gap:24px;margin-bottom:clamp(32px,4vw,64px);position:relative;z-index:2}
+.head.right{flex-direction:row-reverse;text-align:right}
+.head h2{font:900 clamp(46px,8.6vw,150px)/.88 var(--f-wide);letter-spacing:-.06em;text-transform:uppercase;position:relative}
+#banners .head h2{font-size:clamp(42px,6vw,104px)}
+.head h2 .ul{position:absolute;left:-2%;bottom:-.22em;width:104%;height:.3em;overflow:visible}
+.head .aside{max-width:330px;color:var(--muted);font-size:15px}
+.head .aside .hand{display:block;margin-bottom:6px}
+.draw path{stroke-dasharray:var(--len,600);stroke-dashoffset:var(--len,600);transition:stroke-dashoffset 1.4s cubic-bezier(.6,.1,.2,1) .2s}
+.in .draw path,.draw.in path{stroke-dashoffset:0}
+
+/* card base */
+.card{display:block;text-align:left;position:relative;width:100%}
+.card .ph{position:relative;overflow:hidden;border-radius:4px;background:#151515}
+.card .ph img{width:100%;height:100%;object-fit:cover;transition:transform 1s cubic-bezier(.2,.7,.2,1),filter .6s}
+.card:hover .ph img{transform:scale(1.06)}
+.card .cap{display:flex;justify-content:space-between;gap:16px;align-items:baseline;padding-top:12px}
+.card .cap h3{font:700 clamp(17px,1.4vw,22px) var(--f-wide);letter-spacing:-.03em}
+.card .cap span{color:var(--muted);font-size:14px;white-space:nowrap}
+
+/* 01 collage */
+.collage{display:grid;grid-template-columns:repeat(12,1fr);column-gap:clamp(16px,2vw,32px);row-gap:clamp(40px,5vw,80px);position:relative;z-index:2}
+.collage .card:nth-child(1){grid-column:1/8}.collage .card:nth-child(1) .ph{aspect-ratio:16/11}
+.collage .card:nth-child(2){grid-column:9/13;margin-top:clamp(60px,10vw,180px)}.collage .card:nth-child(2) .ph{aspect-ratio:3/4}
+.collage .card:nth-child(3){grid-column:2/6;margin-top:clamp(-120px,-6vw,-40px)}.collage .card:nth-child(3) .ph{aspect-ratio:1}
+.collage .card:nth-child(4){grid-column:7/13}.collage .card:nth-child(4) .ph{aspect-ratio:16/10}
+.collage .tape{position:absolute;top:-14px;left:50%;width:96px;height:28px;background:rgba(255,228,92,.55);transform:translateX(-50%) rotate(-4deg);z-index:2;mix-blend-mode:screen}
+.collage .sticky{position:absolute;z-index:3;pointer-events:none}
+.collage .s1{left:50%;top:2%;transform:rotate(-6deg);display:flex;gap:6px;align-items:flex-start}
+.collage .s1 svg{width:64px;height:60px}
+
+/* 02 slider */
+.slider-bar{display:flex;justify-content:space-between;align-items:center;gap:20px;margin-top:24px;position:relative;z-index:2}
+.progress{flex:1;height:1px;background:var(--line);position:relative;max-width:520px}
+.progress i{position:absolute;left:0;top:-1px;height:3px;background:var(--yellow);width:20%;transition:width .2s}
+.arrows{display:flex;gap:10px}
+.slider-bar.static{display:none}
+.arrows button:disabled{opacity:.3;pointer-events:none}
+.arrows button{width:52px;height:52px;border-radius:50%;border:1px solid var(--ink);display:grid;place-items:center;transition:.25s}
+.arrows button:first-child{background:var(--ink);color:#000}
+.arrows button:hover{background:var(--yellow);border-color:var(--yellow);color:#000}
+.track{display:flex;gap:clamp(12px,1.4vw,22px);overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;padding-inline:var(--pad);scroll-padding-inline:var(--pad);margin-inline:calc(var(--pad)*-1);position:relative;z-index:2;cursor:grab}
+.track::-webkit-scrollbar{display:none}
+.track .card{flex:0 0 clamp(250px,calc((100% - 3 * clamp(12px,1.4vw,22px)) / 4),420px);scroll-snap-align:start}
+.track .card:nth-child(even){margin-top:clamp(30px,4vw,64px)}
+.track .card .ph{aspect-ratio:3/4}
+.track .card .cap{flex-direction:column;gap:2px}
+
+/* 03 list */
+.list{border-top:1px solid var(--line);position:relative;z-index:2}
+.row-it{display:grid;grid-template-columns:70px 1fr auto auto;gap:24px;align-items:center;padding:clamp(18px,2.2vw,30px) 0;border-bottom:1px solid var(--line);text-align:left;width:100%;position:relative}
+.row-it .no{font:normal 20px var(--f-hand);color:var(--yellow)}
+.row-it h3{font:700 clamp(30px,5.4vw,92px)/1.08 var(--f-wide);letter-spacing:-.015em;text-transform:uppercase;color:rgba(237,234,227,.32);transition:color .35s,transform .5s cubic-bezier(.2,.7,.2,1)}
+.row-it:first-child h3,.row-it:hover h3{color:var(--ink)}
+.row-it:hover h3{transform:translateX(14px)}
+.row-it .cl{color:var(--muted);font-size:15px}
+.row-it .ar{width:52px;height:52px;border-radius:50%;border:1px solid var(--line);display:grid;place-items:center;transition:.3s}
+.row-it:hover .ar{background:var(--yellow);color:#000;border-color:var(--yellow);transform:rotate(-45deg)}
+.row-it .thumb{display:none}
+.peek{position:fixed;left:0;top:0;width:300px;aspect-ratio:4/5;pointer-events:none;z-index:40;border-radius:4px;overflow:hidden;opacity:0;transform:translate(-50%,-50%) scale(.6) rotate(-6deg);transition:opacity .3s,transform .4s cubic-bezier(.2,.7,.2,1)}
+.peek.on{opacity:1;transform:translate(-50%,-50%) scale(1) rotate(-4deg)}
+.peek img{width:100%;height:100%;object-fit:cover}
+
+/* 04 offset */
+.offset{display:grid;grid-template-columns:1fr 1fr;gap:clamp(16px,2.4vw,40px);position:relative;z-index:2}
+.offset .col{display:flex;flex-direction:column;gap:clamp(40px,5vw,80px)}
+.offset .col:last-child{padding-top:clamp(80px,12vw,220px)}
+.offset .card:nth-child(1) .ph{aspect-ratio:4/5}
+.offset .card:nth-child(2) .ph{aspect-ratio:4/3}
+.offset .col:last-child .card:nth-child(1) .ph{aspect-ratio:4/3}
+.offset .col:last-child .card:nth-child(2) .ph{aspect-ratio:4/5}
+
+/* about */
+.about{padding-top:clamp(120px,14vw,220px);position:relative}
+.about-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:clamp(32px,6vw,110px);align-items:start;position:relative;z-index:2}
+.about h2{font:900 clamp(46px,8.6vw,150px)/.88 var(--f-wide);letter-spacing:-.06em;text-transform:uppercase}
+.about .lead{color:var(--red);font:500 clamp(20px,1.8vw,26px) var(--f-body);margin:clamp(40px,6vw,100px) 0 18px}
+.about .txt p{max-width:520px;font-size:17px}
+.about .txt p+p{margin-top:14px;color:var(--muted)}
+.stats{display:flex;gap:clamp(24px,4vw,56px);margin-top:44px}
+.stats b{display:block;font:700 clamp(36px,4vw,60px)/1 var(--f-wide);letter-spacing:-.05em}
+.stats span{color:var(--muted);font-size:14px}
+.photo{position:relative;rotate:2.5deg;margin-top:clamp(0px,4vw,60px)}
+.photo .ph{aspect-ratio:4/5;overflow:hidden;border:10px solid #EDEAE3;border-bottom-width:56px;box-shadow:0 30px 60px rgba(0,0,0,.5)}
+.photo img{width:100%;height:100%;object-fit:cover;object-position:center;filter:none}
+.photo .tape{position:absolute;top:-16px;left:30%;width:110px;height:32px;background:rgba(255,228,92,.6);transform:rotate(-7deg)}
+.photo .pcap{position:absolute;bottom:14px;left:20px;color:#1a1a1a;font-size:22px}
+.photo .sig{position:absolute;left:-90px;top:30%;transform:rotate(-8deg);display:flex;flex-direction:column;align-items:flex-end}
+.photo .sig svg{width:70px;height:50px}
+
+.steps{margin-top:clamp(100px,11vw,170px);position:relative;z-index:2}
+.steps-head{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;margin-bottom:36px}
+.steps-head h3{font:700 clamp(30px,3.8vw,60px)/1 var(--f-wide);letter-spacing:-.05em;text-transform:uppercase}
+.steps-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(12px,1.6vw,24px)}
+.step{border:1px solid var(--line);border-radius:4px;padding:24px;min-height:250px;display:flex;flex-direction:column;justify-content:space-between;position:relative;transition:background .3s,border-color .3s}
+.step:hover{background:#141414;border-color:rgba(237,234,227,.3)}
+.step .hand{font-size:24px}
+.step h4{font:700 20px var(--f-wide);letter-spacing:-.03em;margin:44px 0 10px}
+.step p{color:var(--muted);font-size:15px}
+.step .ico{position:absolute;right:20px;top:20px;width:30px;height:30px;color:var(--c);filter:drop-shadow(0 0 8px currentColor)}
+
+/* contacts */
+.contact{position:relative;padding:clamp(120px,14vw,220px) 0 0;overflow:hidden}
+.contact h2{font:900 clamp(46px,9.2vw,160px)/.88 var(--f-wide);letter-spacing:-.06em;text-transform:uppercase;text-align:right;position:relative;z-index:2}
+.c-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;margin-top:clamp(40px,6vw,90px);position:relative;z-index:2}
+.c-item small{display:block;color:var(--muted);font-size:14px;margin-bottom:4px}
+.c-item a,.c-item span{color:var(--orange);font:500 clamp(20px,2vw,30px)/1.25 var(--f-body);transition:color .2s}
+.c-item a:hover{color:var(--yellow)}
+.c-col{display:flex;flex-direction:column;gap:32px}
+.c-col:last-child{align-items:flex-start;justify-self:end;padding-top:clamp(40px,8vw,140px)}
+.mail{display:block;margin-top:clamp(70px,9vw,140px);font-family:var(--f-melt);font-size:clamp(30px,7.6vw,140px);line-height:1;letter-spacing:.03em;white-space:nowrap;position:relative;z-index:2;font-variation-settings:"YEAR" 2005;transition:font-variation-settings .8s cubic-bezier(.2,.7,.2,1),color .4s}
+.mail:hover{font-variation-settings:"YEAR" 2050;color:var(--yellow)}
+.foot{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;padding:40px 0 32px;margin-top:60px;border-top:1px solid var(--line);color:var(--muted);font-size:14px;position:relative;z-index:2}
+.foot a:hover{color:var(--ink)}
+.socials{display:flex;gap:22px;flex-wrap:wrap}
+.socials a{display:inline-flex;align-items:center;gap:6px;min-height:44px;font-weight:500;color:var(--ink)}
+.socials a:hover{color:var(--yellow)}
+
+/* case modal */
+.case{position:fixed;inset:0;z-index:80;background:var(--bg);overflow-y:auto;overflow-x:hidden;visibility:hidden;clip-path:inset(100% 0 0 0);transition:clip-path .8s cubic-bezier(.77,0,.18,1),visibility 0s .8s}
+.case:focus{outline:none}
+.case.open{visibility:visible;clip-path:inset(0 0 0 0);transition:clip-path .8s cubic-bezier(.77,0,.18,1),visibility 0s}
+.case-bar{position:sticky;top:0;z-index:5;display:flex;justify-content:space-between;align-items:center;padding:16px var(--pad);background:linear-gradient(var(--bg) 40%,transparent)}
+.back{font:normal 22px var(--f-hand);color:var(--yellow);display:inline-flex;gap:8px;align-items:center;min-height:44px}
+.back svg{width:40px;height:20px}
+.case-x{width:52px;height:52px;border-radius:50%;background:var(--ink);color:#000;display:grid;place-items:center;transition:transform .4s}
+.case-x:hover{transform:rotate(90deg);background:var(--yellow)}
+.c-hero{padding-top:clamp(20px,4vw,50px)}
+.c-hero .k{display:flex;gap:14px;align-items:center;flex-wrap:wrap;margin-bottom:18px}
+.c-hero .k .hand{font-size:24px}
+.c-hero h1{font:900 clamp(48px,10vw,180px)/.86 var(--f-wide);letter-spacing:-.065em;text-transform:uppercase;overflow-wrap:anywhere}
+.c-facts{display:grid;grid-template-columns:repeat(4,1fr);margin:clamp(28px,4vw,56px) 0;border-top:1px solid var(--line)}
+.c-facts div{padding:18px 18px 0 0}
+.c-facts small{display:block;color:var(--muted);font-size:13px;letter-spacing:.1em;text-transform:uppercase;margin-bottom:4px}
+.c-cover{aspect-ratio:16/8;overflow:hidden;border-radius:4px}
+.c-cover img{width:100%;height:100%;object-fit:cover}
+.c-text{display:grid;grid-template-columns:1fr 1fr;gap:clamp(24px,6vw,110px);padding:clamp(60px,8vw,130px) 0}
+.c-text .big{font:300 clamp(24px,2.6vw,42px)/1.2 var(--f-wide);letter-spacing:-.04em}
+.c-text .big b{font-weight:700;color:var(--yellow)}
+.c-text p{color:var(--muted);font-size:17px;max-width:600px}
+.c-text p+p{margin-top:16px}
+.c-text h4{font:normal 22px var(--f-hand);color:var(--yellow);margin-bottom:10px}
+.c-gal{display:grid;grid-template-columns:repeat(6,1fr);gap:clamp(12px,1.6vw,24px)}
+.c-gal figure{overflow:hidden;border-radius:4px;background:#151515;position:relative}
+.c-gal figure img{width:100%;height:100%;object-fit:cover}
+.c-gal .g1{grid-column:span 4;aspect-ratio:4/3}
+.c-gal .g2{grid-column:span 2;aspect-ratio:auto}
+.c-gal .g3{grid-column:span 3;aspect-ratio:1}
+.c-gal .g4{grid-column:span 3;aspect-ratio:1}
+.c-gal .g5{grid-column:span 6;aspect-ratio:21/9}
+.c-gal figcaption{position:absolute;left:14px;bottom:12px;font:normal 20px var(--f-hand);color:var(--yellow);text-shadow:0 1px 8px rgba(0,0,0,.6)}
+.palette{display:flex;flex-direction:column;height:100%;min-height:300px}
+.palette div{flex:1;display:flex;align-items:flex-end;justify-content:space-between;padding:12px 16px;font:500 13px var(--f-body);letter-spacing:.06em}
+.c-next{display:block;margin-top:clamp(70px,9vw,140px);border-top:1px solid var(--line);padding:clamp(32px,4vw,60px) 0 clamp(60px,8vw,120px);text-align:left;width:100%;position:relative}
+.c-next small{font:normal 22px var(--f-hand);color:var(--yellow)}
+.c-next b{display:block;font:900 clamp(40px,8vw,140px)/.9 var(--f-wide);letter-spacing:-.06em;text-transform:uppercase;transition:color .3s}
+.c-next:hover b{color:var(--yellow)}
+.c-next img{position:absolute;right:0;bottom:clamp(60px,8vw,120px);width:clamp(120px,18vw,280px);aspect-ratio:4/3;object-fit:cover;border-radius:4px;transform:rotate(4deg);transition:transform .5s}
+.c-next:hover img{transform:rotate(-2deg) scale(1.05)}
+
+/* reveal */
+.rv{opacity:0;transform:translateY(50px);transition:opacity 1s,transform 1.1s cubic-bezier(.2,.7,.2,1)}
+.rv.in{opacity:1;transform:none}
+
+/* responsive */
+@media (max-width:1020px){
+  .links{display:none}.talk{display:none}.burger{display:inline-flex;align-items:center}
+  .hero-mid{grid-template-columns:1fr auto}.hero-mid .hand{display:none}
+  .collage .card:nth-child(n){grid-column:span 6;margin-top:0}
+  .collage .card:nth-child(2){margin-top:80px}
+  .collage .card:nth-child(4){margin-top:-80px}
+  .collage .card:nth-child(n) .ph{aspect-ratio:4/5}
+  .collage .s1{display:none}
+  .about-grid{grid-template-columns:1fr}.photo{max-width:440px;margin-left:auto}
+  .steps-grid{grid-template-columns:1fr 1fr}
+  .row-it{grid-template-columns:50px 1fr auto}.row-it .cl{display:none}
+  .c-text{grid-template-columns:1fr}
+}
+@media (max-width:640px){
+  .name{font-size:11.3vw}
+  .head h2,.about h2,.contact h2{font-size:10vw}
+  #banners .head h2{font-size:8vw}
+  .mail{font-size:11vw}
+  .sky .star:nth-child(3n){display:none}
+  .hero-kicker .meta-sm{display:none}
+  .hero-mid{grid-template-columns:1fr;gap:20px}.badge{justify-self:start;width:104px;position:absolute;right:var(--pad);top:-6px}
+  .hero-foot{flex-direction:column;align-items:flex-start}.down{display:none}
+  .head,.head.right{flex-direction:column;align-items:flex-start;text-align:left}
+  .collage{grid-template-columns:1fr}.collage .card:nth-child(n){grid-column:1;margin-top:0}
+  .collage .card:nth-child(n) .ph{aspect-ratio:4/3.4}
+  .row-it{grid-template-columns:72px 1fr auto;gap:16px}.row-it .no{display:none}
+  .row-it .thumb{display:block;width:72px;height:72px;border-radius:4px;overflow:hidden}.row-it .thumb img{width:100%;height:100%;object-fit:cover}
+  .row-it h3{color:var(--ink);font-size:clamp(22px,7vw,30px)}
+  .row-it .ar{width:44px;height:44px}
+  .peek{display:none}
+  .offset{grid-template-columns:1fr}.offset .col:last-child{padding-top:0}
+  .steps-grid{grid-template-columns:1fr}.step{min-height:0}.step h4{margin-top:24px}
+  .steps-head{flex-direction:column;align-items:flex-start}
+  .c-grid{grid-template-columns:1fr;gap:28px}.c-col:last-child{justify-self:start;padding-top:0}
+  .contact h2{text-align:left}
+  .c-facts{grid-template-columns:1fr 1fr}
+  .c-gal{grid-template-columns:1fr}.c-gal figure[class]{grid-column:1;aspect-ratio:4/3}
+  .palette{min-height:240px}
+  .c-next img{display:none}
+  .photo .sig{display:none}
+  .manifesto .note{position:static;margin-top:28px}
+}
+@media (prefers-reduced-motion:reduce){*,*::after{animation:none!important;transition:none!important}.rv{opacity:1;transform:none}.draw path{stroke-dashoffset:0}}
+/* Project presentations keep original image proportions. */
+.c-gal.c-gal-full{grid-template-columns:1fr;gap:clamp(16px,2.4vw,36px)}
+.c-gal.c-gal-full figure[class]{grid-column:1;aspect-ratio:auto;background:transparent}
+.c-gal.c-gal-full figure img{width:100%;height:auto;object-fit:contain}
+.c-cover.c-cover-full{aspect-ratio:auto}
+.c-cover.c-cover-full img{height:auto;object-fit:contain}
+.case-credit{padding-top:20px;border-top:1px solid var(--line);font-size:14px!important}
+.case-credit a{color:var(--yellow);display:inline-flex;align-items:center;min-height:44px}
+@media(max-width:640px){.c-hero h1.case-title-long{font-size:9vw;letter-spacing:-.04em}}
+.case-original{background:#fff;color:#171717;margin-inline:calc(-1 * var(--pad));padding:24px var(--pad) clamp(56px,8vw,110px);font-family:var(--f-body)}
+.source-head{max-width:900px;margin:0 auto 28px;display:grid;grid-template-columns:minmax(0,1fr) minmax(300px,.95fr);gap:24px;align-items:start}
+.source-cover{margin:0;overflow:hidden;background:#f3f3f3}
+.source-cover.newartschool-cover{aspect-ratio:16/9}
+.source-cover.newartschool-cover img{height:100%;object-fit:cover;object-position:top}
+.source-cover img{width:100%;height:auto;object-fit:contain}
+.source-info{padding-top:0}
+.source-info h1{font:600 clamp(25px,2.6vw,38px)/1.15 var(--f-body);letter-spacing:-.035em;text-transform:none;overflow-wrap:anywhere;margin-bottom:18px}
+.source-tags{display:flex;flex-wrap:wrap;gap:8px}
+.source-tags span{border:1px solid #c8c8c8;border-radius:30px;padding:5px 13px;font-size:13px;line-height:1.4}
+.source-lead{max-width:900px;margin:0 auto 26px;font-size:17px;line-height:1.55;color:#333}
+.source-video{max-width:900px;margin:30px auto;aspect-ratio:16/9;background:#111}
+.source-video iframe{width:100%;height:100%;border:0}
+.source-gallery{max-width:900px;margin:0 auto;display:grid;grid-template-columns:1fr;gap:clamp(14px,2vw,26px)}
+.source-gallery.inspiratori-gallery{width:42.1362%}
+.source-gallery.ai-food-gallery{width:70%;max-width:630px}
+.source-gallery.newartschool-gallery{gap:0}
+.source-gallery.vk-tg-gallery{gap:0}
+.source-gallery.telegram-posts-gallery{gap:0}
+.source-gallery.creative-smm-gallery{gap:0}
+.source-gallery.dodo-pizza-gallery{gap:0}
+.source-gallery.altai-gallery{display:block;column-count:2;column-gap:0;max-width:1200px}
+.source-gallery.altai-gallery .source-row{display:contents}
+.source-gallery.altai-gallery figure{display:inline-block;width:100%;break-inside:avoid;vertical-align:top}
+@media(max-width:720px){.source-gallery.altai-gallery{column-count:1}}
+.source-gallery figure{margin:0;background:transparent;overflow:hidden}
+.source-pair{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(14px,2vw,26px);align-items:start}
+.source-row{display:grid;gap:0;align-items:start}.source-row-1{grid-template-columns:1fr}.source-row-2{grid-template-columns:repeat(2,minmax(0,1fr))}.source-row-3{grid-template-columns:repeat(3,minmax(0,1fr))}
+.source-gallery img{width:100%;height:auto;object-fit:contain}
+.source-interstitial{max-width:700px;margin:clamp(24px,4vw,54px) auto;text-align:center;color:#333;font-size:clamp(17px,2vw,23px);line-height:1.5}
+.source-section-note h2{margin:0 0 12px;font-size:clamp(22px,3vw,34px);font-weight:600}.source-section-note p{margin:8px 0;font-size:clamp(15px,1.7vw,19px)}.source-section-note a{color:inherit;text-decoration:underline;text-underline-offset:4px}
+@media(max-width:720px){.source-pair{grid-template-columns:1fr}.source-row-2,.source-row-3{grid-template-columns:1fr}.source-head{grid-template-columns:1fr;gap:20px}.source-cover{max-width:560px}.source-info h1{font-size:28px}}
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"><svg viewBox="0 0 100 100"><path d="M50 0C54 36 64 46 100 50C64 54 54 64 50 100C46 64 36 54 0 50C36 46 46 36 50 0Z" fill="currentColor"/></svg><span>смотреть</span></div>
+
+<nav class="nav" id="nav">
+  <a href="#top" class="brand" aria-label="Егор Яковлев — наверх"><svg viewBox="0 0 100 100"><path d="M50 0C54 36 64 46 100 50C64 54 54 64 50 100C46 64 36 54 0 50C36 46 46 36 50 0Z" fill="currentColor"/></svg>яковлев</a>
+  <ul class="links">
+    <li><a href="#logos">логотипы</a></li>
+    <li><a href="#identity">айдентика</a></li>
+    <li><a href="#smm">smm</a></li>
+    <li><a href="#banners">нейрогенерации</a></li>
+    <li><a href="#about">обо мне</a></li>
+  </ul>
+  <a href="#contact" class="talk">написать мне <svg width="12" height="12" viewBox="0 0 100 100" style="color:var(--yellow)"><path d="M50 0C54 36 64 46 100 50C64 54 54 64 50 100C46 64 36 54 0 50C36 46 46 36 50 0Z" fill="currentColor"/></svg></a>
+  <button class="burger" id="burger" aria-expanded="false" aria-controls="mmenu">меню</button>
+</nav>
+<div class="mmenu" id="mmenu">
+  <button class="burger x" id="mclose" style="display:inline-flex;align-items:center">закрыть</button>
+  <a href="#logos">логотипы</a><a href="#identity">айдентика</a><a href="#smm">smm</a><a href="#banners">нейрогенерации</a><a href="#about">обо мне</a><a href="#contact">контакты</a>
+</div>
+
+<header class="hero" id="top">
+  <div class="sky" data-stars="hero"></div>
+  <div class="wrap">
+    <div class="hero-kicker">
+      <div class="meta-sm">портфолио — 2026</div>
+    </div>
+    <h1 class="name" id="name" aria-label="Егор Яковлев">
+      <span class="row" aria-hidden="true">Егор</span>
+      <span class="row" aria-hidden="true">Яковлев</span>
+    </h1>
+    <div class="hero-mid">
+      <p>Графический дизайнер. Делаю <b>логотипы, айдентику</b> и визуал для соцсетей, после которых бренд узнают с первого взгляда.</p>
+      <div class="badge" aria-hidden="true">
+        <svg class="ring" viewBox="0 0 150 150"><defs><path id="circ" d="M75 75m-58 0a58 58 0 1 1 116 0a58 58 0 1 1-116 0"/></defs><text><textPath href="#circ" textLength="360" lengthAdjust="spacing">открыт для новых проектов</textPath></text></svg>
+        <svg class="core" viewBox="0 0 100 100"><path d="M50 0C54 36 64 46 100 50C64 54 54 64 50 100C46 64 36 54 0 50C36 46 46 36 50 0Z" fill="currentColor"/></svg>
+      </div>
+      <div class="hand">(наведи курсор<br>на буквы — они тают)</div>
+    </div>
+    <div class="hero-foot">
+      <div class="chips"><a class="chip" href="#logos">логотипы</a><a class="chip" href="#identity">айдентика</a><a class="chip" href="#smm">посты для соцсетей</a><a class="chip" href="#banners">нейрогенерации</a></div>
+      <div class="down">листай вниз <svg viewBox="0 0 20 40" fill="none"><path d="M10 2V36M10 36L3 28M10 36L17 28" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></div>
+    </div>
+  </div>
+</header>
+
+<section class="manifesto wrap">
+  <h2 class="rv">Превращаю идеи <span class="pill" style="--r:-4deg"><img src="images/image-d9cd18ffdfad36f5-hand-removed.png" alt=""></span> в&nbsp;<b>бренды,</b> которые хочется <span class="inl-star" style="--c:var(--red)"><svg viewBox="0 0 100 100"><path d="M50 0C54 36 64 46 100 50C64 54 54 64 50 100C46 64 36 54 0 50C36 46 46 36 50 0Z" fill="currentColor"/></svg></span> запомнить, сохранить <span class="pill" style="--r:3deg"><img src="images/image-d80e39e742a8cd48.webp" alt=""></span> и&nbsp;<b>показать друзьям.</b></h2>
+  <div class="note hand"><svg class="draw" viewBox="0 0 60 40" fill="none"><path d="M56 34C40 34 16 30 6 8M6 8L4 20M6 8L17 12" stroke="#FFE45C" stroke-width="2.2" stroke-linecap="round" style="--len:100"/></svg>5 лет, 120+ проектов</div>
+</section>
+
+<main id="works"></main>
+
+<section class="about wrap" id="about">
+  <div class="sky" data-stars="about"></div>
+  <div class="about-grid">
+    <div class="txt rv">
+      <h2>Обо мне</h2>
+      <div class="lead">Меня зовут Егор Яковлев.</div>
+      <p>Я графический дизайнер: помогаю брендам найти свой визуальный язык: создаю логотипы, айдентику и контент для соцсетей</p>
+      <p>Для каждого проекта ищу своё визуальное решение. Чтобы дизайн не просто выглядел красиво, а помогал бренду быть узнаваемым.</p>
+      <div class="stats"><div><b>5+</b><span>лет в дизайне</span></div><div><b>120+</b><span>проектов</span></div><div><b>40+</b><span>брендов</span></div></div>
+    </div>
+    <div class="photo rv">
+      <div class="tape"></div>
+      <div class="ph"><img src="images/about-portrait.png" alt="Портрет Егора Яковлева"></div>
+      <div class="hand pcap">Это я :)</div>
+      
+    </div>
+  </div>
+
+  <div class="steps">
+    <div class="steps-head rv"><h3>Как я работаю</h3><span class="hand">4 шага от идеи до результата</span></div>
+    <div class="steps-grid">
+      <div class="step rv"><svg class="ico" style="--c:var(--red)" viewBox="0 0 100 100"><path d="M50 0C54 36 64 46 100 50C64 54 54 64 50 100C46 64 36 54 0 50C36 46 46 36 50 0Z" fill="currentColor"/></svg><span class="hand">(1)</span><div><h4>Задача</h4><p>Обсуждаем цель проекта, сроки и требования к результату.</p></div></div>
+      <div class="step rv"><svg class="ico" style="--c:var(--blue)" viewBox="0 0 100 100"><path d="M50 0C54 36 64 46 100 50C64 54 54 64 50 100C46 64 36 54 0 50C36 46 46 36 50 0Z" fill="currentColor"/></svg><span class="hand">(2)</span><div><h4>Договор и предоплата</h4><p>Фиксируем условия и стоимость в договоре. После предоплаты приступаю к работе.</p></div></div>
+      <div class="step rv"><svg class="ico" style="--c:var(--yellow)" viewBox="0 0 100 100"><path d="M50 0C54 36 64 46 100 50C64 54 54 64 50 100C46 64 36 54 0 50C36 46 46 36 50 0Z" fill="currentColor"/></svg><span class="hand">(3)</span><div><h4>Работа над дизайном</h4><p>Создаю дизайн по согласованной задаче и вношу правки в рамках договорённостей.</p></div></div>
+      <div class="step rv"><svg class="ico" style="--c:var(--orange)" viewBox="0 0 100 100"><path d="M50 0C54 36 64 46 100 50C64 54 54 64 50 100C46 64 36 54 0 50C36 46 46 36 50 0Z" fill="currentColor"/></svg><span class="hand">(4)</span><div><h4>Готовые файлы</h4><p>Передаю финальные материалы в согласованных форматах.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<footer class="contact" id="contact">
+  <div class="sky" data-stars="contact"></div>
+  <div class="wrap">
+    <h2 class="rv">Контакты</h2>
+    <div class="c-grid">
+      <div class="c-col rv">
+        <div class="c-item"><small>Город</small><span>Москва, работаю удалённо<br>по всему миру</span></div>
+        <div class="c-item"><small>Telegram</small><a href="https://t.me/ArtDecade" target="_blank" rel="noopener">@ArtDecade</a></div>
+      </div>
+      <div class="c-col rv">
+        <div class="c-item"><small>Телефон</small><a href="tel:+79829234065">+7 (982) 923 40 65</a></div>
+        <div class="c-item"><small>Почта</small><a href="mailto:ArtDecade@yandex.ru">ArtDecade@yandex.ru</a></div>
+      </div>
+    </div>
+    <a class="mail rv" href="https://t.me/ArtDecade" target="_blank" rel="noopener" data-cursor="написать">Написать ↗</a>
+    <div class="foot">
+      <div class="socials"><a href="https://t.me/ArtDecade" target="_blank" rel="noopener">Telegram ↗</a><a href="https://max.ru/u/f9LHodD0cOIk4cwy2FHHeuONGnvUt9wrTtZiuB2UU1rOpSgK7h7dR6q_QgM" target="_blank" rel="noopener">Max ↗</a></div>
+      <span>© 2026 Егор Яковлев</span>
+      <a href="#top">наверх ↑</a>
+    </div>
+  </div>
+</footer>
+
+<div class="peek" id="peek"><img alt="" id="peekImg"></div>
+
+<div class="case" id="case" tabindex="-1" role="dialog" aria-modal="true" aria-labelledby="c-title">
+  <div class="case-bar">
+    <button class="back" data-close><svg viewBox="0 0 40 20" fill="none"><path d="M38 12C26 8 14 8 3 10M3 10L10 4M3 10L10 16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>назад</button>
+    <button class="case-x" data-close aria-label="Закрыть"><svg width="18" height="18" viewBox="0 0 20 20"><path d="M3 3L17 17M17 3L3 17" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg></button>
+  </div>
+  <div class="wrap" id="case-body"></div>
+</div>
+
+<script>
+const STAR='<svg viewBox="0 0 100 100"><path d="M50 0C54 36 64 46 100 50C64 54 54 64 50 100C46 64 36 54 0 50C36 46 46 36 50 0Z" fill="currentColor"/></svg>';
+
+/* ====== ДАННЫЕ. Это заглушки — замените на свои проекты. img — путь к обложке, gallery — доп. фото ====== */
+const SECTIONS=[
+ {id:"logos",title:"Логотипы",layout:"collage",note:"мои любимые работы",
+  aside:"Знаки, шрифтовые и комбинированные логотипы. Простые формы, которые читаются в любом размере.",
+  items:[
+   {t:"Родненькие",c:"Рюмочная",y:2025,img:"images/rodnenkiye-01.webp",cover:"images/rodnenkiye-01.webp",pal:["#234C9B","#C83B37","#C6A77B","#EFE7D8"],task:"Айдентика рюмочной «Родненькие» — винтажный леттеринг, ностальгическая палитра и графика в духе советских плакатов.",tags:["айдентика и брендинг","логотип","рюмочная","дизайн упаковки","дизайн меню"],introText:["«Родненькие» — рюмочная в центре Калининграда с уютной, почти домашней атмосферой. Концепция вдохновлена эстетикой советского быта и тёплой ностальгией.","Задача — создать узнаваемый фирменный стиль и оформить вывеску, меню, упаковку и соцсети."],originalLayout:"deziiign",interstitials:{"1":"<p class=\"source-interstitial\"><strong>ТВОРЧЕСКИЙ ПРОЦЕСС</strong><br>Для логотипа перебрали несколько вариантов винтажного леттеринга и доработали выбранную форму, чтобы передать тёплый характер и эстетику 1970–1980-х годов.</p>","3":"<p class=\"source-interstitial\"><strong>ИДЕЯ ЛОГОТИПА</strong><br>Плавная линия под названием направляет взгляд к подписи, а крупная петля буквы «Р» делает слово узнаваемым и задаёт дружелюбный тон.</p>","5":"<p class=\"source-interstitial\"><strong>ФИРМЕННЫЕ ЦВЕТА</strong><br>Кобальтовый, плакатный красный, бежевый и молочный оттенки отсылают к эмалированной посуде, советским вывескам, выпечке и пломбиру.</p>","7":"<p class=\"source-interstitial\"><strong>ИЛЛЮСТРАЦИИ</strong><br>Графика в духе агитплакатов и знакомые бытовые образы поддерживают атмосферу душевности, тепла и общей памяти.</p>"},gallery:["images/rodnenkiye-02.webp","images/rodnenkiye-03.webp","images/rodnenkiye-04.webp","images/rodnenkiye-05.webp","images/rodnenkiye-06.webp","images/rodnenkiye-07.webp","images/rodnenkiye-08.webp","images/rodnenkiye-09.webp","images/rodnenkiye-10.webp","images/rodnenkiye-11.webp","images/rodnenkiye-12.webp","images/rodnenkiye-13.webp","images/rodnenkiye-14.webp","images/rodnenkiye-15.webp","images/rodnenkiye-16.webp","images/rodnenkiye-17.webp","images/rodnenkiye-18.webp"]},
+   {t:"Бодрый кофе COFROCK",c:"Кофейня",y:2024,img:"images/cofrock-cover.jpg",cover:"images/cofrock-cover.jpg",pal:[],task:"Айдентика кофейни, где рок и кофе объединены через узнаваемого персонажа — кружку-рокера.",tags:["айдентика и брендинг","коммуникационная стратегия","персонажи","брендинг","упаковка напитков"],originalLayout:"deziiign",gallery:["images/cofrock-01.gif","images/cofrock-03.jpg","images/cofrock-04.gif","images/cofrock-05.jpg","images/cofrock-06-a.jpg","images/cofrock-06-b.gif","images/cofrock-07.jpg","images/cofrock-08.jpg","images/cofrock-09.jpg","images/cofrock-10.jpg","images/cofrock-11-a.jpg","images/cofrock-11-b.jpg","images/cofrock-12.jpg","images/cofrock-13.jpg","images/cofrock-14.jpg","images/cofrock-15.gif","images/cofrock-16.jpg"],galleryPairs:[4,10],interstitialAfter:1,interstitialText:"Иногда хочется выпить кофе, который бодрит не меньше, чем любимый рок-плейлист в наушниках, не так ли?\n\nДля этого проекта мне нужно было создать дизайн для кафе, в котором гармонично сосуществуют две самые бодрящие вещи — рок и кофе. Моя идея заключалась в том, чтобы создать игривый и легко узнаваемый талисман, который бы мгновенно воплотил уникальную атмосферу кафе. А что может быть лучшим символом этого объединения, чем кружка-рокер? Эта концепция показалась мне очевидной и увлекательной.\n\nДавайте посмотрим на то, что мне удалось создать в итоге. Приятного просмотра!"},
+   {t:"Тапир",c:"Гастро-бар национальной кухни",y:2026,img:"images/tapir-01.webp",cover:"images/tapir-01.webp",pal:["#52644D","#D8D0B8","#F3F0E5","#252820"],task:"Фирменный стиль гастро-бара национальной кухни «Тапир» — природные образы, выразительный знак и цельная визуальная система.",tags:["айдентика и брендинг","логотип","гастро-бар","национальная кухня","визуальная идентичность"],introText:"Фирменный стиль и логотип для гастро-бара национальной кухни «Тапир».",originalLayout:"deziiign",gallery:["images/tapir-02.webp","images/tapir-03.webp","images/tapir-04.webp","images/tapir-05.webp","images/tapir-06.webp","images/tapir-07.webp","images/tapir-08.gif","images/tapir-09.webp","images/tapir-10.webp","images/tapir-11.webp","images/tapir-12.webp","images/tapir-13.webp","images/tapir-14.webp","images/tapir-15.webp","images/tapir-16.webp","images/tapir-17.webp","images/tapir-18.gif","images/tapir-19.webp","images/tapir-20.webp","images/tapir-21.webp","images/tapir-22.gif"]},
+   {t:"ВСОЮЗЕ",c:"Студия дизайна интерьера",y:2023,img:"images/vsoyuz-01.webp",cover:"images/vsoyuz-01.webp",pal:["#111111","#E45B22","#F1F0EE","#77736E"],task:"Логотип и фирменный стиль студии дизайна интерьера «ВСОЮЗЕ» — строгая айдентика с эмоциональными деталями.",tags:["логотип","айдентика","студия дизайна интерьера","архитектура","фирменный стиль"],introText:["«ВСОЮЗЕ» — студия дизайна интерьера из Хабаровска, которая создаёт современные пространства и реализует проекты под ключ, соединяя эстетику и удобство.","Задача — разработать строгий и чёткий фирменный стиль с эмоциональными элементами, который поможет студии выделиться среди конкурентов."],originalLayout:"deziiign",gallery:["images/vsoyuz-02.webp","images/vsoyuz-03.webp","images/vsoyuz-04.gif","images/vsoyuz-06.webp","images/vsoyuz-07.webp","images/vsoyuz-08.gif","images/vsoyuz-09.webp","images/vsoyuz-10.webp","images/vsoyuz-11.gif","images/vsoyuz-12.webp","images/vsoyuz-13.webp","images/vsoyuz-14.gif","images/vsoyuz-15.webp","images/vsoyuz-16.webp"]}
+ ]},
+ {id:"identity",title:"Айдентика",layout:"slider",right:true,
+  aside:"Системы фирменного стиля: логотип, цвет, шрифты, паттерны и носители — от визиток до мерча.",
+  items:[
+   {t:"РОВНО",c:"Модульная мебель",y:2026,img:"images/rovno-01.webp",cover:"images/rovno-01.webp",pal:["#F5C29E","#FFD12E","#F45B13","#F6F0E8"],task:"Айдентика бренда модульной мебели: яркий визуальный образ и система коммуникации для предметов, которые помогают создавать своё пространство.",description:["«РОВНО» — бренд модульной мебели для дома. Фирменный стиль строится вокруг идеи личного пространства и возможности менять его под себя.","Визуальная система использует крупную типографику, дружелюбный знак и тёплую палитру с жёлтыми, оранжевыми и розовыми акцентами. Яркие предметные съёмки показывают мебель в живом интерьере.","В кейсе представлены логотип, фирменная графика и носители айдентики."],introText:"Айдентика бренда модульной мебели «РОВНО». Пространство — это продолжение тебя.",tags:["айдентика и брендинг","мебель","модульная мебель","логотип","фирменный стиль"],originalLayout:"deziiign",gallery:["images/rovno-01.webp","images/rovno-02.webp","images/rovno-03.webp","images/rovno-04.webp","images/rovno-05.webp","images/rovno-06.webp","images/rovno-07.gif","images/rovno-08.webp","images/rovno-09.webp","images/rovno-10.webp","images/rovno-11.gif","images/rovno-12.webp","images/rovno-13.webp","images/rovno-14.gif","images/rovno-15.webp","images/rovno-16.webp","images/rovno-17.webp","images/rovno-18.webp","images/rovno-19.webp","images/rovno-20.webp","images/rovno-21.webp"],galleryLayout:"full",source:"https://www.behance.net/gallery/256263493/rovno-ajdentika-brenda-modulnoj-mebeli",author:"Olesya Pylnova"},
+   {t:"Деревня Щир",c:"Упаковка настойки",y:2026,img:"shchir-cover",pal:["#D61F2C","#F5F2EE","#54251F","#191919"],task:"Авторский напиток и его айдентика: настойка из красной смородины, собранной в деревне, и упаковка, связанная с местом её создания.",introText:"В этом проекте напиток и фирменный стиль создавались вместе: смородину собрали на даче, приготовили настойку, а затем разработали оформление бутылки и всю визуальную систему.",tags:["дизайн упаковки","упаковка напитков"],originalLayout:"deziiign",gallery:["shchir-01","shchir-02","shchir-03","shchir-04","shchir-05","shchir-06","shchir-07","shchir-07","shchir-08","shchir-09","shchir-10","shchir-11","shchir-12"],interstitials:{"5":"<p class=\"source-interstitial\">На этикетке указаны координаты куста, где собрали ягоды для настойки.</p>","6":"<p class=\"source-interstitial\">Красные круги повторяют форму ягод. Этот знак связывает состав напитка с деревней, где он появился: с её красным цветом, узорами и вышивкой.</p>"}},
+   {t:"Абрамцево",c:"Музей-заповедник",y:2026,img:"abramtsevo-cover",pal:["#7891C8","#D84243","#31543B","#F7EEE4"],task:"Территориальный брендинг усадьбы Абрамцево — творческой коммуны, где более ста лет живут и работают художники, дизайнеры и архитекторы.",description:["Айдентика передаёт характер Абрамцево как места, объединяющего художников, дизайнеров, архитекторов и других представителей интеллигенции.","Графический акцент строится на мотиве ручной вышивки: шрифтовые формы разработаны на основе стежков. Красные, синие и зелёные варианты знака и орнамента связывают систему с ремесленной историей усадьбы.","В проекте показаны фирменные композиции и их применение на печатных материалах и одежде."],introText:"Проект представляет собой территориальный брендинг усадьбы Абрамцево. Это место — творческая коммуна, где уже более ста лет селятся художники, дизайнеры, архитекторы и другие представители интеллигенции.",originalLayout:"deziiign",interstitialAfter:9,interstitialText:"Акцентный шрифт был создан на основе стежков, что поддерживает метафору ручного труда.",gallery:["abramtsevo-e89bbb33628524b5","abramtsevo-9812be5dfba71eac","abramtsevo-c3936c09ea5ed823","abramtsevo-18407a51779e685b","abramtsevo-f0ebcbc5f8b9a154","abramtsevo-184e471d953a4dbd","abramtsevo-6a634f91aaa95b07","abramtsevo-545d1ef43cd3123c","abramtsevo-49bac0d652a5ed36","abramtsevo-12aa12ac661c7ea7","abramtsevo-6726006a15529f1a","abramtsevo-8424dd62148ca29d","abramtsevo-b9320c9bde0f53ac"],galleryLayout:"full",source:"https://deziiign.com/project/ajdentika-dlya-muzeya-zapovednika-abramce-7739a532cdcf4ec5b7476017ccc400de",author:"Алина Фомина",curator:"Елена Дождикова"},
+   {t:"Тихий час",c:"Капсульный отель",y:2026,img:"quiet-cover",pal:["#191919","#F4F1E9","#9E9A92","#D7D0C4"],task:"Айдентика капсульного отеля у воды — место, где можно замедлиться, побыть в тишине и отдохнуть от повседневной суеты.",introText:["Капсульный отель на берегу предлагает уединённое пространство для отдыха. Здесь нет насыщенной программы и лишних впечатлений — только тишина, сон и возможность ненадолго отключиться от привычного ритма.","Сюда можно приехать, чтобы выспаться, подумать над важным решением или просто провести время наедине с собой."],tags:["айдентика и брендинг","иллюстративная айдентика","сон","брендинг","мерч","иллюстрации в дизайне","отель","3D-окружение"],originalLayout:"deziiign",gallery:["quiet-original-246c09f1e5d5809d","quiet-original-430ee83603625818","quiet-original-2fcf053f2224d723","quiet-original-fb2ab9d41e5376e1","quiet-original-567033d149cc544d","quiet-original-05f6b2939858384a","quiet-original-a610b2c02e7367f8","quiet-original-483d3bc685260696","quiet-original-42dd0b3a4b51abb7","quiet-original-2a0356179cc5d439","quiet-original-2e1e56e2f567ec43","quiet-original-95c6d096dd36c2b6","quiet-original-7640a4ca1f90ba81","quiet-original-a9ec656a24ef83db","quiet-original-3535d4b869dbad66","quiet-original-6ad8c61b57f56573","quiet-original-be6779c3b1dc3dcb","quiet-original-dc3027a74de2f417","quiet-original-fc1c8b367950e845","quiet-original-5566ab68e2fbf133","quiet-original-c9310599e8d7254f","quiet-original-7e83ca3c6dfff51c","quiet-original-7d78a561d4f88d6b","quiet-original-e9b708e89a026080","quiet-original-b7d19f42cc9424ad","quiet-original-52afba60e2d1e6ca","quiet-original-1ad107483a787bd4","quiet-original-5cb2f185de1dac37","quiet-original-b245f8600d5dd07c","quiet-original-09d9cff43096e7a2","quiet-original-81afd72cdb769d31","quiet-original-ca29175bcb9a874a","quiet-original-09164d1fb3ca65a5","quiet-original-292d19f771e80ff1","quiet-original-d6a7c7d3e00799b9"],interstitials:{"15":"<p class=\"source-interstitial\">Мы берём знакомый с детства ритуал и переводим его во взрослую систему координат: дневной сон, отсутствие лишнего выбора и ощущение безопасности.</p>","24":"<p class=\"source-interstitial\"><a href=\"https://bloom-fuzzy-plover.tilda.ws/\" target=\"_blank\" rel=\"noopener\">Сайт отеля ↗</a></p>","27":"<section class=\"source-interstitial source-section-note\"><h2>ASH × ТИХИЙ ЧАС</h2><p>В коллаборации встречаются две формы одной тишины: место, где можно отключиться от сигналов, и отель, куда приезжают отдохнуть и подумать.</p></section>","33":"<section class=\"source-interstitial source-section-note\"><h2>ИИ-платки</h2><p>Серия цельных монохромных узоров, созданных как иллюстративное продолжение айдентики.</p></section>"}},
+   {t:"Праздник черничного пирога",c:"Гастрономический фестиваль",y:2026,img:"images/blueberry-cover.jpg",cover:"images/blueberry-cover.jpg",pal:["#30366F","#FFFFFF","#F4F3F0","#594287"],task:"Айдентика гастрономического фестиваля «Праздник черничного пирога» в Красновишерске — визуальный образ летнего праздника, посвящённого местным традициям и северной ягоде.",description:["Фестиваль в Красновишерске объединяет местную кухню, ремёсла, музыку и семейные активности вокруг черники и черничного пирога.","Для праздника создана выразительная фирменная система с крупными рукописными надписями, иллюстрациями ягод и насыщенными синими и фиолетовыми акцентами. Айдентика адаптирована для афиш, уличных флагов, ситилайтов, мерча, буклета и упаковки."],introText:"Фирменный стиль гастрономического фестиваля в Красновишерске, посвящённого чернике, местной кухне и летним традициям Пермского края.",tags:["айдентика и брендинг","дизайн мероприятий","гастрономический фестиваль","Красновишерск"],originalLayout:"deziiign",gallery:["images/blueberry-01.png","images/blueberry-02.png","images/blueberry-03.png","images/blueberry-04.png","images/blueberry-05.png","images/blueberry-06.png","images/blueberry-07.png","images/blueberry-08.png","images/blueberry-09.png","images/blueberry-10.png","images/blueberry-11.png","images/blueberry-12.png","images/blueberry-13.png"],galleryLayout:"full",source:"https://deziiign.com/project/prazdnik-chernichnogo-piroga-404248b1af01432eaa0f3ea8ff29e29c"},
+   {t:"Айтем — поп-ап магазин в Нижнем Новгороде",c:"Поп-ап магазин",y:2026,img:"atem-cover",pal:["#EEECE5","#141414","#30428B","#A64B35"],task:"Айдентика временного магазина журнала «Собака.ru», который каждый сезон собирает российские бренды, события и людей в новых городских пространствах.",introText:"«Айтем» — временный модный магазин и кураторское событие с постоянно обновляемым набором российских брендов. Поп-апы открываются на ограниченный срок в разных местах Нижнего Новгорода и объединяют покупки с лекциями, встречами и культурной программой.",tags:["айдентика и брендинг","брендинг"],originalLayout:"deziiign",gallery:["atem-01","atem-02","atem-03","atem-04","atem-05","atem-06","atem-07","atem-08","atem-09","atem-10","atem-11","atem-12","atem-13","atem-14","atem-15","atem-16","atem-17","atem-18","atem-19","atem-20","atem-21","atem-22","atem-23","atem-24","atem-25","atem-26"],interstitials:{"1":"<p class=\"source-interstitial\">Пространство каждый раз появляется в новой городской локации и становится местом встреч, лекций и культурной программы.</p>","2":"<section class=\"source-interstitial source-section-note\"><p>Айдентика вдохновлена коллекционированием и архивами брендов. Для участников и мест проведения разработаны собственные печати, а единая система сохраняет узнаваемый образ поп-апа и даёт каждому событию свой голос.</p></section>","8":"<p class=\"source-interstitial\">Паспорт поп-апа собирает историю посещений: за покупки и события в нём ставят печати, а заполненные страницы открывают бонусы от брендов.</p>","18":"<p class=\"source-interstitial\">Мерч поддерживает механику коллекционирования: предметы можно дополнять печатями и превращать в личный архив поп-апов.</p>","21":"<p class=\"source-interstitial\">Визуальная коммуникация продолжается в социальных сетях: в ней соединяются изображения брендов-участников и фотографии с самих событий.</p>"}},
+   {t:"Твой Шеф",c:"Домашние полуфабрикаты",y:2026,img:"images/tvoy-shef-01.webp",cover:"images/tvoy-shef-01.webp",pal:["#445C8E","#F7F1EB","#63833F","#A55247"],task:"Айдентика и упаковка семейного бренда домашних полуфабрикатов «Твой Шеф»: тёплая домашняя эстетика и мотивы гжельской росписи.",description:["«Твой Шеф» — семейный проект домашних полуфабрикатов ручной работы. Для бренда разработана цельная система упаковки, которая передаёт домашний характер продукции и объединяет ассортимент.","Визуальная концепция вдохновлена гжельской росписью: растительные узоры, декоративные формы и сине-белая палитра сочетаются с мягкой типографикой. Две версии логотипа помогают адаптировать фирменный образ к разным носителям.","Фирменная система продолжается на упаковке и других брендовых материалах."],introText:"Айдентика и дизайн упаковки для семейного бренда домашних полуфабрикатов «Твой Шеф». Концепция объединяет тепло домашней кухни, мотивы гжельской росписи и современную систему оформления всей линейки.",tags:["айдентика и брендинг","дизайн упаковки","домашние полуфабрикаты","фуд-брендинг"],originalLayout:"deziiign",gallery:["images/tvoy-shef-02.webp","images/tvoy-shef-03.webp","images/tvoy-shef-04.webp","images/tvoy-shef-05.webp","images/tvoy-shef-06.webp","images/tvoy-shef-07.webp","https://mir-s3-cdn-cf.behance.net/project_modules/1400_webp/e5ae86253535977.6a6b5994ed85d.png","https://mir-s3-cdn-cf.behance.net/project_modules/1400_webp/f2e568253535977.6a6b5994ed212.png","https://mir-s3-cdn-cf.behance.net/project_modules/1400_webp/e5cd92253535977.6a6b5994ecb74.png","https://mir-s3-cdn-cf.behance.net/project_modules/1400_webp/898e25253535977.6a6b63d42113e.png"],galleryLayout:"full",source:"https://www.behance.net/gallery/253535977/TVOY-SHEF-Branding-Packaging-ajdentika-i-upakovka",author:"Arina Bayram"},
+   {t:"Затестим",c:"Замороженное тесто",y:2026,img:"zatestim-0",cover:"zatestim-1",pal:["#0062FF","#FAFAF7","#D6C6A8"],
+    task:"Айдентика и упаковка бренда замороженного теста, который превращает выпечку в <b>время вместе с близкими.</b>",
+    description:["В основе проекта — домашняя выпечка как совместный досуг с семьёй и друзьями. На упаковке фотографии изделий из теста соединяются с историями, рассказанными через нарисованных персонажей.","Визуальная система строится на синей графике, светлом фоне, выразительном словесном знаке и живых контурных иллюстрациях. Персонажи взаимодействуют с выпечкой, превращая продукт в небольшую сцену из повседневной жизни.","В кейсе показаны варианты упаковки, детали оформления и применение графики на носителях. Разные сюжеты объединены цветом, типографикой и характером рисунка."],
+    tags:["дизайн упаковки","упаковка еды","кулинария","иллюстрации в дизайне","фудборд"],video:"https://kinescope.io/embed/vzcnDneBjRVWkWgCguUr37",originalLayout:"deziiign",gallery:["zatestim-original-01","zatestim-original-02","zatestim-original-03","zatestim-original-04","zatestim-original-05","zatestim-original-06","zatestim-original-07","zatestim-original-08","zatestim-original-09","zatestim-original-10","zatestim-original-11","zatestim-original-12","zatestim-original-13","zatestim-original-14","zatestim-original-15","zatestim-original-16","zatestim-original-17"],
+    galleryLayout:"full",source:"https://deziiign.com/project/zatestim-brend-zamorozhennogo-testa-927978f7b4424b9497092a73f0b7b3a7",author:"Юлия Штей",curator:"Леонид Славин"},
+ ]},
+ {id:"smm",title:"SMM",layout:"list",
+  aside:"Визуал для Instagram, Telegram и VK: посты, карусели, сторис и шаблоны для команды.",
+  items:[
+   {t:"Монопосты",c:"Посты для соцсетей",y:2026,img:"images/monoposts-cover.png",hoverImg:"images/monoposts-cover.png",cover:"images/monoposts-cover.png",pal:[],task:"Визуалы для нескольких SMM-проектов, созданные по техническому заданию и в рамках фирменного стиля каждого бренда.",tags:["SMM-дизайн","посты","VK","Telegram"],introText:"В кейсе собраны визуалы для нескольких SMM-проектов. Каждый макет создавался по готовому техническому заданию и в рамках фирменного стиля конкретного бренда.",video:"https://kinescope.io/embed/9G3aYx9oQBNDx1HRWv7m9X",originalLayout:"deziiign",gallery:["images/vk-tg-smm-02.webp","images/vk-tg-smm-03.webp","images/vk-tg-smm-04.webp","images/vk-tg-smm-05.webp","images/vk-tg-smm-06.webp","images/vk-tg-smm-07.webp","images/vk-tg-smm-08.webp","images/vk-tg-smm-09.webp","images/vk-tg-smm-10.webp","images/vk-tg-smm-11.webp","images/vk-tg-smm-12.webp","images/vk-tg-smm-13.webp","images/vk-tg-smm-14.webp","images/vk-tg-smm-15.webp","images/vk-tg-smm-16.webp","images/vk-tg-smm-17.webp","images/vk-tg-smm-18.webp","images/vk-tg-smm-19.webp","images/vk-tg-smm-20.webp","images/vk-tg-smm-21.webp","images/vk-tg-smm-22.webp","images/vk-tg-smm-23.webp","images/vk-tg-smm-24.webp","images/vk-tg-smm-25.webp","images/vk-tg-smm-26.webp","images/vk-tg-smm-27.webp","images/vk-tg-smm-28.webp","images/vk-tg-smm-29.webp"],galleryGroups:[1,3,1,3,2,1,2,2,1,3,1,2,2,1,3]},
+   {t:"Dodo Pizza",c:"Рекламные материалы",y:2026,img:"images/dodo-pizza-cover.png",hoverImg:"images/dodo-pizza-cover.png",cover:"images/dodo-pizza-cover.png",pal:[],task:"Рекламные креативы для Dodo Pizza: промокоды, продуктовые публикации и сторис для социальных сетей.",tags:["SMM-дизайн","рекламные креативы","социальные сети"],introText:"Серия визуальных материалов для соцсетей Dodo Pizza: промокоды, продуктовые посты, сторис и стикеры в фирменной графике бренда.",originalLayout:"deziiign",gallery:["images/dodo-pizza-01.webp","images/dodo-pizza-02.webp","images/dodo-pizza-03.webp","images/dodo-pizza-04.webp","images/dodo-pizza-05.webp","images/dodo-pizza-06.webp","images/dodo-pizza-07.webp","images/dodo-pizza-08.webp"]},
+   {t:"Вдохновители",c:"Telegram-канал",y:2026,img:"images/inspiratori-01.webp",cover:"images/inspiratori-01.webp",pal:[],task:"Серия публикаций для Telegram-канала «Вдохновители»: яркие афиши и посты с единым визуальным ритмом.",tags:["SMM-дизайн","Telegram","дизайн постов","социальные сети"],introText:["Визуальная серия для Telegram-канала «Вдохновители». В проекте собраны публикации и афиши мероприятий, оформленные в единой графической манере.","Контрастная типографика, насыщенные цветовые поля и крупные заголовки помогают быстро считывать тему публикации и выделяют её в ленте."],originalLayout:"deziiign",gallery:["images/inspiratori-02.webp","images/inspiratori-03.webp","images/inspiratori-04.webp","images/inspiratori-05.webp","images/inspiratori-06.webp","images/inspiratori-07.webp","images/inspiratori-08.webp"]},
+   {t:"ChatPlace",c:"SMM-дизайн",y:2025,img:"images/telegram-posts-cover.webp",hoverImg:"images/telegram-posts-03.webp",cover:"images/telegram-posts-cover.webp",pal:[],task:"Серия публикаций для Telegram-канала: яркая типографика, синие и фиолетовые акценты и понятная подача полезного контента.",tags:["SMM-дизайн","посты","Telegram"],introText:"Посты для Telegram-канала ChatPlace о продвижении, контенте и работе с аудиторией.",originalLayout:"deziiign",gallery:["images/telegram-posts-01.webp","images/telegram-posts-02.webp","images/telegram-posts-03.webp"]},
+   {t:"Рекламные креативы",c:"Instagram и соцсети",y:2023,img:"images/creative-smm-cover.jpg",hoverImg:"images/creative-smm-02.webp",cover:"images/creative-smm-cover.jpg",pal:[],task:"Подборка рекламных креативов для Instagram и социальных сетей.",tags:["SMM-дизайн","рекламные креативы","Instagram","социальные сети"],introText:"Серия рекламных публикаций для социальных сетей: яркие визуалы, тексты и композиции для разных брендов и задач.",originalLayout:"deziiign",gallery:["images/creative-smm-02.webp","images/creative-smm-03.webp","images/creative-smm-04.webp","images/creative-smm-05.webp","images/creative-smm-06.webp","images/creative-smm-07.webp","images/creative-smm-08.webp","images/creative-smm-09.webp"]},
+   {t:"NewArtSchool",c:"Рекламные материалы",y:2026,img:"images/behance-251145065-01.png",hoverImg:"images/behance-251145065-hover.png",cover:"images/behance-214-01.png",pal:[],task:"Подборка рекламных баннеров для школы цифрового рисунка NewArtSchool и их адаптаций для постов, сторис и рекламных сетей.",tags:["баннеры","SMM-дизайн","посты","сторис","ресайзы"],introText:"В проекте собраны рекламные креативы школы цифрового рисунка NewArtSchool: баннеры для курсов и их версии для социальных сетей и рекламных форматов.",originalLayout:"deziiign",gallery:["images/behance-251145065-01.png","images/behance-251145065-02.png"]},
+ ]},
+ {id:"banners",title:"Нейрогенерации",layout:"offset",right:true,
+  aside:"AI-фотографии и нейроконтент для брендов, социальных сетей и digital-кампаний.",
+  items:[
+   {t:"Эко-отель на Алтае",c:"AI-контент · 2026",y:2026,img:"images/altai-01.webp",hoverImg:"images/altai-01.webp",cover:"images/altai-01.webp",pal:[],task:"Серия AI-фотографий для эко-отеля: природа Алтая, сезонная гастрономия и SPA-ритуалы в спокойной editorial-эстетике.",tags:["AI-контент","нейрофотография","эко-отель","социальные сети"],introText:["Визуальная серия для эко-отеля на Алтае, вдохновлённая ранней осенью, природой и атмосферой спокойного отдыха.","В проекте соединены природные пейзажи, гастрономия и wellness-ритуалы. Тёплый рассеянный свет, натуральные фактуры и приглушённая палитра создают цельный современный образ без буквальной фольклорной стилизации."],originalLayout:"deziiign",gallery:["images/altai-02.webp","images/altai-03.webp","images/altai-04.webp","images/altai-05.webp","images/altai-06.webp","images/altai-07.webp","images/altai-08.webp","images/altai-09.webp","images/altai-10.webp","images/altai-11.webp","images/altai-12.webp","images/altai-13.webp","images/altai-14.webp","images/altai-15.webp","images/altai-16.webp","images/altai-17.webp","images/altai-18.webp","images/altai-19.webp","images/altai-20.webp","images/altai-21.webp","images/altai-22.webp","images/altai-23.webp","images/altai-24.webp","images/altai-25.webp","images/altai-26.webp","images/altai-27.webp","images/altai-28.webp","images/altai-29.webp","images/altai-30.webp","images/altai-31.webp","images/altai-32.webp","images/altai-33.webp","images/altai-34.webp"],galleryGroups:[2,2,2,2,2,2,2,3,2,3,5,6]},
+   {t:"ИИ-еда для меню",c:"AI-фуд-фотография",y:2025,img:"images/ai-food-01.webp",hoverImg:"images/ai-food-02.webp",cover:"images/ai-food-01.webp",pal:[],task:"Серия AI-изображений еды для оформления меню и коммуникации гастрономического бренда.",tags:["AI-контент","фуд-фотография","меню"],introText:"Визуальная серия, в которой нейросети используются для создания аппетитных изображений блюд для меню.",originalLayout:"deziiign",gallery:["images/ai-food-02.webp","images/ai-food-03.webp","images/ai-food-04.webp","images/ai-food-05.webp","images/ai-food-06.webp","images/ai-food-07.webp","images/ai-food-08.webp"]},
+   {t:"Ремесло",c:"Настойки · 2026",y:2026,img:"images/remeslo-01.webp",hoverImg:"images/remeslo-02.webp",cover:"images/remeslo-01.webp",pal:[],task:"Серия предметных и рекламных изображений для линейки настоек «Ремесло».",tags:["предметная съёмка","рекламные материалы","напитки"],introText:"Визуальная серия для настоек «Ремесло»: продуктовые кадры с бутылками, ингредиентами и природными фактурами.",originalLayout:"deziiign",gallery:["images/remeslo-02.webp","images/remeslo-03.webp","images/remeslo-04.webp","images/remeslo-05.webp","images/remeslo-06.webp","images/remeslo-07.webp","images/remeslo-08.webp"]},
+   {t:"AI-фото для лимонада ВКУСВИЛЛ",c:"AI-фотография · 2026",y:2026,img:"images/vkusvill-lemonade-01.webp",hoverImg:"images/vkusvill-lemonade-02.webp",cover:"images/vkusvill-lemonade-01.webp",pal:[],task:"Серия AI-фотографий для лимонада ВкусВилл с разными вкусами и атмосферой натуральных ингредиентов.",tags:["AI-фотография","предметная съёмка","лимонад","ВкусВилл"],introText:"Визуальная серия для линейки лимонадов ВкусВилл: банки напитка в природных композициях, которые подчёркивают вкусы и ингредиенты.",originalLayout:"deziiign",gallery:["images/vkusvill-lemonade-02.webp","images/vkusvill-lemonade-03.webp","images/vkusvill-lemonade-04.webp"]}
+ ]}
+];
+const MORE={
+ logos:["Подбираю форму и типографику так, чтобы знак отражал характер бренда и хорошо читался в разных размерах.","Готовый логотип можно использовать на цифровых и печатных носителях — от аватарки до вывески."],
+ identity:["Собираю визуальную систему из логотипа, палитры, типографики и графических элементов. Проверяю, как она работает на разных носителях.","Единая визуальная система помогает бренду сохранять узнаваемость во всех точках контакта."],
+ smm:["Разработал визуальную концепцию ленты и набор шаблонов для постов, каруселей и сторис, чтобы публикации узнавались в ленте без логотипа.","Команда клиента собирает новые посты за 10 минут, а лента выглядит цельно и стильно."],
+ banners:["Создал серию AI-визуалов и выстроил единый образ для публикаций и рекламных материалов.","Подготовил визуальный контент для digital-коммуникации бренда с вниманием к свету, композиции и атмосфере."]
+};
+
+/* ====== Рендер ====== */
+const IMG={"atem-01":"images/atem-01.jpg","atem-02":"images/atem-02.jpg","atem-03":"images/atem-03.jpg","atem-04":"images/atem-04.jpg","atem-05":"images/atem-05.jpg","atem-06":"images/atem-06.jpg","atem-07":"images/atem-07.jpg","atem-08":"images/atem-08.jpg","atem-09":"images/atem-09.jpg","atem-10":"images/atem-10.jpg","atem-11":"images/atem-11.jpg","atem-12":"images/atem-12.jpg","atem-13":"images/atem-13.jpg","atem-14":"images/atem-14.jpg","atem-15":"images/atem-15.jpg","atem-16":"images/atem-16.jpg","atem-17":"images/atem-17.jpg","atem-18":"images/atem-18.jpg","atem-19":"images/atem-19.jpg","atem-20":"images/atem-20.jpg","atem-21":"images/atem-21.jpg","atem-22":"images/atem-22.jpg","atem-23":"images/atem-23.jpg","atem-24":"images/atem-24.jpg","atem-25":"images/atem-25.jpg","atem-26":"images/atem-26.jpg","atem-cover":"images/atem-cover.jpg","shchir-01":"images/shchir-01-lossless.webp","shchir-02":"images/shchir-02-lossless.webp","shchir-03":"images/shchir-03.gif","shchir-04":"images/shchir-04-lossless.webp","shchir-05":"images/shchir-05-lossless.webp","shchir-06":"images/shchir-06.gif","shchir-07":"images/shchir-07-lossless.webp","shchir-08":"images/shchir-08-lossless.webp","shchir-09":"images/shchir-09-lossless.webp","shchir-10":"images/shchir-10-lossless.webp","shchir-11":"images/shchir-11-lossless.webp","shchir-12":"images/shchir-12-lossless.webp","shchir-cover":"images/derevnya-shchir-cover.jpg","quiet-original-246c09f1e5d5809d":"images/quiet-original-246c09f1e5d5809d.png","quiet-original-430ee83603625818":"images/quiet-original-430ee83603625818.png","quiet-original-2fcf053f2224d723":"images/quiet-original-2fcf053f2224d723.gif","quiet-original-fb2ab9d41e5376e1":"images/quiet-original-fb2ab9d41e5376e1.png","quiet-original-567033d149cc544d":"images/quiet-original-567033d149cc544d.gif","quiet-original-05f6b2939858384a":"images/quiet-original-05f6b2939858384a.png","quiet-original-a610b2c02e7367f8":"images/quiet-original-a610b2c02e7367f8.png","quiet-original-483d3bc685260696":"images/quiet-original-483d3bc685260696.png","quiet-original-42dd0b3a4b51abb7":"images/quiet-original-42dd0b3a4b51abb7.png","quiet-original-2a0356179cc5d439":"images/quiet-original-2a0356179cc5d439.png","quiet-original-2e1e56e2f567ec43":"images/quiet-original-2e1e56e2f567ec43.png","quiet-original-95c6d096dd36c2b6":"images/quiet-original-95c6d096dd36c2b6.png","quiet-original-7640a4ca1f90ba81":"images/quiet-original-7640a4ca1f90ba81.png","quiet-original-a9ec656a24ef83db":"images/quiet-original-a9ec656a24ef83db.png","quiet-original-3535d4b869dbad66":"images/quiet-original-3535d4b869dbad66.png","quiet-original-6ad8c61b57f56573":"images/quiet-original-6ad8c61b57f56573.png","quiet-original-be6779c3b1dc3dcb":"images/quiet-original-be6779c3b1dc3dcb.jpg","quiet-original-dc3027a74de2f417":"images/quiet-original-dc3027a74de2f417.png","quiet-original-fc1c8b367950e845":"images/quiet-original-fc1c8b367950e845.png","quiet-original-5566ab68e2fbf133":"images/quiet-original-5566ab68e2fbf133.png","quiet-original-c9310599e8d7254f":"images/quiet-original-c9310599e8d7254f.png","quiet-original-7e83ca3c6dfff51c":"images/quiet-original-7e83ca3c6dfff51c.png","quiet-original-7d78a561d4f88d6b":"images/quiet-original-7d78a561d4f88d6b.png","quiet-original-e9b708e89a026080":"images/quiet-original-e9b708e89a026080.png","quiet-original-b7d19f42cc9424ad":"images/quiet-original-b7d19f42cc9424ad.png","quiet-original-52afba60e2d1e6ca":"images/quiet-original-52afba60e2d1e6ca.png","quiet-original-1ad107483a787bd4":"images/quiet-original-1ad107483a787bd4.png","quiet-original-5cb2f185de1dac37":"images/quiet-original-5cb2f185de1dac37.png","quiet-original-b245f8600d5dd07c":"images/quiet-original-b245f8600d5dd07c.gif","quiet-original-09d9cff43096e7a2":"images/quiet-original-09d9cff43096e7a2.png","quiet-original-81afd72cdb769d31":"images/quiet-original-81afd72cdb769d31.png","quiet-original-ca29175bcb9a874a":"images/quiet-original-ca29175bcb9a874a.png","quiet-original-09164d1fb3ca65a5":"images/quiet-original-09164d1fb3ca65a5.png","quiet-original-292d19f771e80ff1":"images/quiet-original-292d19f771e80ff1.png","quiet-original-d6a7c7d3e00799b9":"images/quiet-original-d6a7c7d3e00799b9.png","quiet-cover":"images/quiet-cover.jpg","zatestim-original-01":"images/zatestim-original-01.png","zatestim-original-02":"images/zatestim-original-02.jpg","zatestim-original-03":"images/zatestim-original-03.jpg","zatestim-original-04":"images/zatestim-original-04.jpg","zatestim-original-05":"images/zatestim-original-05.jpg","zatestim-original-06":"images/zatestim-original-06.jpg","zatestim-original-07":"images/zatestim-original-07.jpg","zatestim-original-08":"images/zatestim-original-08.jpg","zatestim-original-09":"images/zatestim-original-09.jpg","zatestim-original-10":"images/zatestim-original-10.jpg","zatestim-original-11":"images/zatestim-original-11.jpg","zatestim-original-12":"images/zatestim-original-12.png","zatestim-original-13":"images/zatestim-original-13.jpg","zatestim-original-14":"images/zatestim-original-14.jpg","zatestim-original-15":"images/zatestim-original-15.jpg","zatestim-original-16":"images/zatestim-original-16.jpg","zatestim-original-17":"images/zatestim-original-17.png","abramtsevo-cover":"images/abramtsevo-tile.jpg","abramtsevo-e89bbb33628524b5":"images/abramtsevo-e89bbb33628524b5.jpg","abramtsevo-9812be5dfba71eac":"images/abramtsevo-9812be5dfba71eac.jpg","abramtsevo-c3936c09ea5ed823":"images/abramtsevo-c3936c09ea5ed823.jpg","abramtsevo-f0ebcbc5f8b9a154":"images/abramtsevo-f0ebcbc5f8b9a154.jpg","abramtsevo-18407a51779e685b":"images/abramtsevo-18407a51779e685b.jpg","abramtsevo-184e471d953a4dbd":"images/abramtsevo-184e471d953a4dbd.jpg","abramtsevo-545d1ef43cd3123c":"images/abramtsevo-545d1ef43cd3123c.jpg","abramtsevo-6a634f91aaa95b07":"images/abramtsevo-6a634f91aaa95b07.jpg","abramtsevo-49bac0d652a5ed36":"images/abramtsevo-49bac0d652a5ed36.jpg","abramtsevo-12aa12ac661c7ea7":"images/abramtsevo-12aa12ac661c7ea7.jpg","abramtsevo-6726006a15529f1a":"images/abramtsevo-6726006a15529f1a.jpg","abramtsevo-8424dd62148ca29d":"images/abramtsevo-8424dd62148ca29d.jpg","abramtsevo-b9320c9bde0f53ac":"images/abramtsevo-b9320c9bde0f53ac.jpg","zatestim-0":"images/zatestim-tile.jpg","zatestim-1":"images/zatestim-cover.jpg","zatestim-2":"images/zatestim-02.jpg","zatestim-3":"images/zatestim-03.jpg","zatestim-4":"images/zatestim-04.jpg","zatestim-5":"images/zatestim-05.jpg","zatestim-6":"images/zatestim-06.jpg","zatestim-7":"images/zatestim-07.jpg","zatestim-8":"images/zatestim-08.jpg","zatestim-9":"images/zatestim-09.jpg","zatestim-10":"images/zatestim-10.jpg","zatestim-11":"images/zatestim-11.png","zatestim-12":"images/zatestim-12.jpg","zatestim-13":"images/zatestim-13.jpg","zatestim-14":"images/zatestim-14.jpg","zatestim-15":"images/zatestim-15.jpg","obsidian":"images/image-44b2d70bf0d15ef4.webp","kofeiny":"images/image-34c89a16d97eb2c9.webp","prism":"images/image-0b3b132c1a1e75eb.webp","forma":"images/image-295a32c4fb06c799.webp","grove":"images/image-97c0ddb8d9318eaf.webp","pulse":"images/image-1596668fc7a23694.webp","star":"images/image-d9cd18ffdfad36f5.webp","signal":"images/image-9925fd609b3af9d2.webp","burger":"images/image-9874c6033218d590.webp","collage":"images/image-6e8dfc11bacb05d1.webp","yoga":"images/image-d7b7dd52dc8d1e85.webp","billboard":"images/image-2db70dcdde31411f.webp","lightbox":"images/image-9c23983bcd67c452.webp","neon":"images/image-d80e39e742a8cd48.webp","sketch":"images/image-b4f9119b9952f2d6.webp","bloom":"images/image-1a14aab8a4f8effd.webp","riso":"images/image-e4ca4ab1a9d38c90.webp","ai-food-01":"images/ai-food-01.webp","ai-food-02":"images/ai-food-02.webp","ai-food-03":"images/ai-food-03.webp","ai-food-04":"images/ai-food-04.webp","ai-food-05":"images/ai-food-05.webp","ai-food-06":"images/ai-food-06.webp","ai-food-07":"images/ai-food-07.webp","ai-food-08":"images/ai-food-08.webp","remeslo-01":"images/remeslo-01.webp","remeslo-02":"images/remeslo-02.webp","remeslo-03":"images/remeslo-03.webp","remeslo-04":"images/remeslo-04.webp","remeslo-05":"images/remeslo-05.webp","remeslo-06":"images/remeslo-06.webp","remeslo-07":"images/remeslo-07.webp","remeslo-08":"images/remeslo-08.webp","vkusvill-lemonade-01":"images/vkusvill-lemonade-01.webp","vkusvill-lemonade-02":"images/vkusvill-lemonade-02.webp","vkusvill-lemonade-03":"images/vkusvill-lemonade-03.webp","vkusvill-lemonade-04":"images/vkusvill-lemonade-04.webp"};
+const flat=[];const lum=h=>{const n=parseInt(h.slice(1),16);return((n>>16)*.299+((n>>8)&255)*.587+(n&255)*.114)/255};const im=n=>IMG[n]||n;
+const card=(it,i,extra="",inph="")=>`<button class="card rv" data-i="${i}" data-cursor="смотреть" aria-label="Открыть проект ${it.t}">${extra}<div class="ph">${inph}<img src="${im(it.img)}" alt="${it.t} — ${it.c}"></div><div class="cap"><h3>${it.t}</h3><span>${it.c} · ${it.y}</span></div></button>`;
+const ul=`<svg class="ul draw" viewBox="0 0 400 30" preserveAspectRatio="none" fill="none"><path d="M4 18C90 8 220 6 396 14M30 26C140 20 260 20 360 24" stroke="#FFE45C" stroke-width="3" stroke-linecap="round" vector-effect="non-scaling-stroke" style="--len:900"/></svg>`;
+document.getElementById("works").innerHTML=SECTIONS.map((s,si)=>{
+  const idx=s.items.map(it=>{it.sec=s;return flat.push(it)-1});
+  let body="";
+  if(s.layout==="collage"){
+    body=`<div class="collage">${s.items.map((it,k)=>card(it,idx[k],k===1?'<div class="tape"></div>':'')).join("")}
+      <div class="sticky s1 hand">${s.note}<svg class="draw" viewBox="0 0 64 60" fill="none"><path d="M60 6C40 6 14 18 8 52M8 52L4 40M8 52L18 44" stroke="#FFE45C" stroke-width="2.2" stroke-linecap="round" style="--len:110"/></svg></div></div>`;
+  }else if(s.layout==="slider"){
+    body=`<div class="track" id="track">${s.items.map((it,k)=>card(it,idx[k])).join("")}</div>
+      <div class="slider-bar"><div class="progress"><i id="prog"></i></div><div class="arrows"><button aria-label="Назад" id="prev">←</button><button aria-label="Вперёд" id="next">→</button></div></div>`;
+  }else if(s.layout==="list"){
+    body=`<div class="list">${s.items.map((it,k)=>`<button class="row-it rv" data-i="${idx[k]}" data-img="${im(it.hoverImg||it.img)}" aria-label="Открыть проект ${it.t}"><span class="no">(${k+1})</span><span class="thumb"><img src="${im(it.img)}" alt=""></span><h3>${it.t}</h3><span class="cl">${it.c} · ${it.y}</span><span class="ar">→</span></button>`).join("")}</div>`;
+  }else{
+    const a=[0,2],b=[1,3];
+    body=`<div class="offset"><div class="col">${a.map(k=>card(s.items[k],idx[k])).join("")}</div><div class="col">${b.map(k=>card(s.items[k],idx[k])).join("")}</div></div>`;
+  }
+  return `<section class="work wrap" id="${s.id}"><div class="sky" data-stars="${s.id}"></div>
+    <div class="head ${s.right?"right":""} rv"><h2>${s.title}${ul}</h2><div class="aside"><span class="hand">${s.items.length} ${s.items.length%100>=11&&s.items.length%100<=14?"проектов":s.items.length%10===1?"проект":s.items.length%10>=2&&s.items.length%10<=4?"проекта":"проектов"}</span>${s.aside}</div></div>
+    ${body}</section>`;
+}).join("");
+
+/* hero letters */
+const nameEl=document.getElementById("name");
+nameEl.querySelectorAll(".row").forEach(r=>{r.innerHTML=[...r.textContent].map(c=>`<span class="ch">${c}</span>`).join("")});
+const chars=[...nameEl.querySelectorAll(".ch")];
+chars.forEach((c,i)=>{c.style.setProperty("--y",2050);setTimeout(()=>c.style.setProperty("--y",2005),250+i*70)});
+let mx=-999,my=-999;
+const fine=matchMedia("(hover:hover) and (pointer:fine)").matches;
+if(fine){
+  document.querySelector(".hero").addEventListener("pointermove",e=>{
+    chars.forEach(c=>{const r=c.getBoundingClientRect();const d=Math.hypot(e.clientX-(r.left+r.width/2),e.clientY-(r.top+r.height/2));const k=Math.max(0,1-d/260);c.style.setProperty("--y",Math.round(2005+45*k));c.classList.toggle("hot",k>.55)});
+  });
+  document.querySelector(".hero").addEventListener("pointerleave",()=>chars.forEach(c=>{c.style.setProperty("--y",2005);c.classList.remove("hot")}));
+}else{
+  // на телефонах буквы «тают» волной
+  let t=0,heroVis=true;new IntersectionObserver(e=>heroVis=e[0].isIntersecting).observe(document.querySelector(".hero"));setInterval(()=>{if(!heroVis||document.hidden)return;t++;chars.forEach((c,i)=>{const k=(Math.sin(t*.5-i*.7)+1)/2;c.style.setProperty("--y",Math.round(2005+40*k*k))})},700);
+}
+
+/* stars */
+const COLORS=["var(--red)","var(--blue)","var(--yellow)","var(--orange)","var(--ice)"];
+const rnd=(a,b)=>a+Math.random()*(b-a);
+let seed=7;const sr=()=>{seed=(seed*16807)%2147483647;return seed/2147483647};
+const plan={hero:[14,5],logos:[5,3],identity:[4,3],smm:[4,3],banners:[5,3],about:[5,3],contact:[10,4]};
+document.querySelectorAll("[data-stars]").forEach(sky=>{
+  const [g,l]=plan[sky.dataset.stars]||[4,2];let h="";
+  for(let i=0;i<g+l;i++){const glow=i<g;const s=glow?(sr()<.25?rnd(46,80):rnd(14,36)):rnd(16,30);
+    h+=`<span class="star ${glow?"glow":"line"}" data-depth="${(sr()*.6+.2).toFixed(2)}" style="left:${(sr()*96).toFixed(1)}%;top:${(sr()*94).toFixed(1)}%;--s:${s.toFixed(0)}px;--c:${COLORS[Math.floor(sr()*5)]};--d:${rnd(4,9).toFixed(1)}s;animation-delay:-${rnd(0,8).toFixed(1)}s">${STAR.replace('fill="currentColor"',glow?'fill="currentColor"':'fill="none"')}</span>`;}
+  sky.innerHTML=h;
+});
+const stars=[...document.querySelectorAll(".star")];
+if(fine&&!matchMedia("(prefers-reduced-motion:reduce)").matches){let raf=0,px=0,py=0;addEventListener("pointermove",e=>{px=e.clientX;py=e.clientY;if(raf)return;raf=requestAnimationFrame(()=>{raf=0;const x=px/innerWidth-.5,y=py/innerHeight-.5;stars.forEach(s=>{if(s.offsetParent===null)return;const d=s.dataset.depth*40;s.style.translate=`${x*d}px ${y*d}px`})})})}
+
+/* cursor */
+const cur=document.getElementById("cursor"),curL=cur.querySelector("span");
+if(fine){addEventListener("pointermove",e=>{cur.style.transform=`translate(${e.clientX}px,${e.clientY}px)`;const t=e.target.closest("[data-cursor]");cur.classList.toggle("big",!!t);if(t)curL.textContent=t.dataset.cursor})}
+
+/* nav */
+const nav=document.getElementById("nav");addEventListener("scroll",()=>nav.classList.toggle("solid",scrollY>40),{passive:true});
+const mm=document.getElementById("mmenu");
+const bg=document.getElementById("burger");
+const setMenu=o=>{mm.classList.toggle("open",o);bg.setAttribute("aria-expanded",o);document.body.style.overflow=o?"hidden":"";if(o)document.getElementById("mclose").focus();else bg.focus({preventScroll:true})};
+bg.onclick=()=>setMenu(true);
+document.getElementById("mclose").onclick=()=>setMenu(false);
+mm.querySelectorAll("a").forEach(a=>a.onclick=()=>{mm.classList.remove("open");bg.setAttribute("aria-expanded",false);document.body.style.overflow=""});
+
+/* slider */
+const track=document.getElementById("track"),prog=document.getElementById("prog");
+const bar=document.querySelector(".slider-bar"),pv=document.getElementById("prev"),nx=document.getElementById("next");
+const upd=()=>{const m=track.scrollWidth-track.clientWidth;bar.classList.toggle("static",m<8);prog.style.width=(20+80*(m?track.scrollLeft/m:1))+"%";pv.disabled=track.scrollLeft<4;nx.disabled=track.scrollLeft>m-4};
+track.addEventListener("scroll",upd,{passive:true});addEventListener("resize",upd);upd();
+const step=()=>track.querySelector(".card").offsetWidth+20;
+document.getElementById("next").onclick=()=>track.scrollBy({left:step(),behavior:"smooth"});
+document.getElementById("prev").onclick=()=>track.scrollBy({left:-step(),behavior:"smooth"});
+let drag=null,moved=false;
+track.addEventListener("pointerdown",e=>{if(e.pointerType!=="mouse")return;drag={x:e.clientX,s:track.scrollLeft};moved=false;track.style.scrollSnapType="none"});
+addEventListener("pointermove",e=>{if(!drag)return;const dx=e.clientX-drag.x;if(Math.abs(dx)>5)moved=true;track.scrollLeft=drag.s-dx});
+addEventListener("pointerup",()=>{if(drag){drag=null;track.style.scrollSnapType=""}});
+
+/* list peek */
+const peek=document.getElementById("peek"),peekImg=document.getElementById("peekImg");
+document.querySelectorAll(".row-it").forEach(r=>{
+  r.addEventListener("pointerenter",()=>{if(!fine)return;peekImg.src=r.dataset.img;peek.classList.add("on")});
+  r.addEventListener("pointerleave",()=>peek.classList.remove("on"));
+});
+addEventListener("pointermove",e=>{if(peek.classList.contains("on")){peek.style.left=e.clientX+"px";peek.style.top=e.clientY+"px"}});
+
+/* reveal */
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add("in");io.unobserve(e.target)}}),{threshold:.12});
+document.querySelectorAll(".rv,.draw").forEach(el=>io.observe(el));
+
+/* case */
+const cs=document.getElementById("case"),cb=document.getElementById("case-body");let cur_i=-1,lastF=null,bodyOverflowBefore="",htmlOverflowBefore="";
+const BG=()=>[...document.body.children].filter(el=>el!==cs&&el.id!=="cursor"&&el.tagName!=="SCRIPT");
+function openCase(i,fromPop){
+  cur_i=i;const it=flat[i],s=it.sec,nx=flat[(i+1)%flat.length],m=it.description||MORE[s.id];
+  const g=it.gallery;
+  const fig=(cls,pos,zoom,cap)=>`<figure class="${cls}"><img src="${im(it.img)}" alt="${it.t} — деталь" style="object-position:${pos};transform:scale(${zoom})">${cap?`<figcaption>${cap}</figcaption>`:""}</figure>`;
+  const gal=g?g.map((src,k)=>`<figure class="g${k%5+1}"><img src="${im(src)}" alt="${it.t} — материал ${k+1}" loading="lazy" decoding="async"></figure>`).join(""):
+    fig("g1","50% 50%",1.35,"крупный план")+
+    `<figure class="g2"><div class="palette">${it.pal.map((c,k)=>`<div style="background:${c};color:${lum(c)>.5?"#000":"#fff"}"><span>${["основной","акцент","фон","доп."][k]}</span><span>${c}</span></div>`).join("")}</div></figure>`+
+    fig("g3","15% 30%",1.8,"")+fig("g4","85% 70%",1.8,"детали")+fig("g5","50% 40%",1.15,"");
+  const nextMarkup=`<button class="c-next" data-go="${(i+1)%flat.length}" data-cursor="дальше"><small>следующий проект →</small><b>${nx.t}</b><img src="${im(nx.img)}" alt=""></button>`;
+  if(it.originalLayout==="deziiign"){
+
+    const tags=(it.tags||[]).map(tag=>`<span>${tag}</span>`).join("");
+    const video=it.video?`<div class="source-video"><iframe src="${it.video}" title="Видео проекта ${it.t}" loading="lazy" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe></div>`:"";
+    const galleryMarkup=(()=>{let out="";const pairs=it.galleryPairs||[];const groups=it.galleryGroups||[];const figure=(src,index)=>`<figure><img src="${im(src)}" alt="${it.t} — изображение ${index+1}" loading="lazy" decoding="async"></figure>`;if(groups.length){let k=0;for(const count of groups){out+=`<div class="source-row source-row-${count}">`;for(let j=0;j<count&&k<g.length;j++,k++)out+=figure(g[k],k);out+="</div>";}return out;}for(let k=0;k<g.length;k++){if(pairs.includes(k)&&k+1<g.length){out+=`<div class="source-pair">${figure(g[k],k)}${figure(g[k+1],k+1)}</div>`;k++;}else out+=figure(g[k],k);out+=(it.interstitials||{})[k+1]|| (it.interstitialAfter===k+1?`<p class="source-interstitial">${it.interstitialText}</p>`:"");}return out;})();
+    const intro=Array.isArray(it.introText)?it.introText.map(p=>`<p class="source-lead">${p}</p>`).join(""):it.introText?`<p class="source-lead">${it.introText}</p>`:"";
+    cb.innerHTML=`<article class="case-original">
+      
+      <div class="source-head"><figure class="source-cover${it.t==="NewArtSchool"?" newartschool-cover":""}"><img src="${im(it.cover||it.img)}" alt="${it.t} — заглавное изображение"></figure><div class="source-info"><h1 id="c-title">${it.t}</h1><div class="source-tags">${tags}</div></div></div>
+      ${intro}${video}
+      <div class="source-gallery${it.t==="Вдохновители"?" inspiratori-gallery":it.t==="NewArtSchool"?" newartschool-gallery":it.t==="ChatPlace"?" telegram-posts-gallery":it.t==="Монопосты"?" vk-tg-gallery":it.t==="Рекламные креативы"?" creative-smm-gallery":it.t==="Dodo Pizza"?" dodo-pizza-gallery":it.t==="ИИ-еда для меню"?" ai-food-gallery":it.t==="Эко-отель на Алтае"?" altai-gallery":""}">${galleryMarkup}</div>
+      
+    </article>${nextMarkup}`;
+  }else{
+    cb.innerHTML=`
+   <div class="c-hero"><div class="k"><span class="hand">${s.num}</span><span class="meta-sm">— ${it.y}</span></div><h1 id="c-title" class="${it.source?"case-title-long":""}">${it.t}</h1></div>
+   <div class="c-facts"><div><small>${it.source?"Проект":"Клиент"}</small>${it.t}</div><div><small>Сфера</small>${it.c}</div><div><small>Год</small>${it.y}</div><div><small>Услуга</small>${s.title}</div></div>
+   <div class="c-cover ${it.cover?"c-cover-full":""}"><img src="${im(it.cover||it.img)}" alt="${it.t} — обложка проекта"></div>
+   <div class="c-text"><div class="big">${it.task}</div><div><h4>${it.description?"о проекте":"что сделано"}</h4>${m.map(p=>`<p>${p}</p>`).join("")}</div></div>
+   <div class="c-gal ${it.galleryLayout==="full"?"c-gal-full":""}">${gal}</div>${nextMarkup}`;
+  }
+  peek.classList.remove("on");cur.classList.remove("big");
+  if(!cs.classList.contains("open")){lastF=document.activeElement;bodyOverflowBefore=document.body.style.overflow;htmlOverflowBefore=document.documentElement.style.overflow;cs.classList.add("open");document.body.style.overflow="hidden";document.documentElement.style.overflow="hidden";BG().forEach(el=>el.inert=true);if(!fromPop)history.pushState({c:i},"","#project-"+(i+1))}
+  else if(!fromPop)history.replaceState({c:i},"","#project-"+(i+1));
+  cs.scrollTop=0;setTimeout(()=>cs.focus({preventScroll:true}),50);
+}
+function closeCase(fromPop){if(!cs.classList.contains("open"))return;cs.classList.remove("open");document.body.style.overflow=bodyOverflowBefore;document.documentElement.style.overflow=htmlOverflowBefore;BG().forEach(el=>el.inert=false);lastF&&lastF.focus({preventScroll:true});if(!fromPop&&history.state&&history.state.c!=null)history.back()}
+addEventListener("popstate",e=>{if(e.state&&e.state.c!=null)openCase(e.state.c,true);else closeCase(true)});
+document.addEventListener("click",e=>{
+  const c=e.target.closest("[data-i]");if(c){if(moved&&c.closest(".track")){moved=false;return}return openCase(+c.dataset.i)}
+  if(e.target.closest("[data-close]"))return closeCase();
+  const g=e.target.closest("[data-go]");if(g)openCase(+g.dataset.go);
+});
+addEventListener("keydown",e=>{if(e.key==="Escape"){if(mm.classList.contains("open"))setMenu(false);else closeCase()}});
+const m0=location.hash.match(/^#project-(\d+)$/);if(m0&&flat[m0[1]-1]){history.replaceState(null,"",location.pathname);openCase(m0[1]-1)}
+
+if(location.hash.startsWith("#demo")){document.querySelectorAll(".rv,.draw").forEach(el=>el.classList.add("in"))}
+if(location.hash==="#demo-case"){openCase(+(new URLSearchParams(location.search).get("i")||0))}
+
+// Prevent the browser's image context menu (save, copy, and visual search) on site images and GIFs.
+document.addEventListener("contextmenu",e=>{if(e.target.closest("img"))e.preventDefault()},true);
+document.addEventListener("dragstart",e=>{if(e.target.closest("img"))e.preventDefault()},true);
+</script>
+</body>
+</html>
