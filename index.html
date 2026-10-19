@@ -648,7 +648,7 @@ function openCase(i,fromPop){
     const intro=Array.isArray(it.introText)?it.introText.map(p=>`<p class="source-lead">${p}</p>`).join(""):it.introText?`<p class="source-lead">${it.introText}</p>`:"";
     cb.innerHTML=`<article class="case-original">
       
-      <div class="source-head"><figure class="source-cover${it.t==="NewArtSchool"?" newartschool-cover":""}"><img src="${im(it.cover||it.img)}" alt="${it.t} — заглавное изображение"></figure><div class="source-info"><h1 id="c-title">${it.t}</h1><div class="source-tags">${tags}</div></div></div>
+      <div class="source-head"><figure class="source-cover${it.t==="NewArtSchool"?" newartschool-cover":""}"><img src="${im(it.cover||it.img)}" alt="${it.t} — заглавное изображение" loading="lazy" decoding="async"></figure><div class="source-info"><h1 id="c-title">${it.t}</h1><div class="source-tags">${tags}</div></div></div>
       ${intro}${video}
       <div class="source-gallery${it.t==="Вдохновители"?" inspiratori-gallery":it.t==="NewArtSchool"?" newartschool-gallery":it.t==="ChatPlace"?" telegram-posts-gallery":it.t==="Монопосты"?" vk-tg-gallery":it.t==="Рекламные креативы"?" creative-smm-gallery":it.t==="Dodo Pizza"?" dodo-pizza-gallery":it.t==="ИИ-еда для меню"?" ai-food-gallery":it.t==="Эко-отель на Алтае"?" altai-gallery":""}">${galleryMarkup}</div>
       
@@ -657,7 +657,7 @@ function openCase(i,fromPop){
     cb.innerHTML=`
    <div class="c-hero"><div class="k"><span class="hand">${s.num}</span><span class="meta-sm">— ${it.y}</span></div><h1 id="c-title" class="${it.source?"case-title-long":""}">${it.t}</h1></div>
    <div class="c-facts"><div><small>${it.source?"Проект":"Клиент"}</small>${it.t}</div><div><small>Сфера</small>${it.c}</div><div><small>Год</small>${it.y}</div><div><small>Услуга</small>${s.title}</div></div>
-   <div class="c-cover ${it.cover?"c-cover-full":""}"><img src="${im(it.cover||it.img)}" alt="${it.t} — обложка проекта"></div>
+   <div class="c-cover ${it.cover?"c-cover-full":""}"><img src="${im(it.cover||it.img)}" alt="${it.t} — обложка проекта" loading="lazy" decoding="async"></div>
    <div class="c-text"><div class="big">${it.task}</div><div><h4>${it.description?"о проекте":"что сделано"}</h4>${m.map(p=>`<p>${p}</p>`).join("")}</div></div>
    <div class="c-gal ${it.galleryLayout==="full"?"c-gal-full":""}">${gal}</div>${nextMarkup}`;
   }
@@ -685,6 +685,7 @@ document.addEventListener("dragstart",e=>{if(e.target.closest("img"))e.preventDe
 </script>
 </body>
 </html>
+
 
 
 
